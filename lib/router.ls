@@ -1,5 +1,5 @@
 Router.configure({
   layoutTemplate: 'layout'
 })
-Router.map ()->
+Router.map ->
   this.route('index', {path: '/'})

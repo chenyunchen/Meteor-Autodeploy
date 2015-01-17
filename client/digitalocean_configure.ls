@@ -1,9 +1,9 @@
 Template.configureLoginServiceDialogForDigitalocean.helpers({
-  siteUrl: ()->
+  siteUrl: ->
     Meteor.absoluteUrl()
 })
 
-Template.configureLoginServiceDialogForDigitalocean.fields = ()->
+Template.configureLoginServiceDialogForDigitalocean.fields = ->
   [
     {property: 'clientId', label: 'Client Id'},
     {property: 'secret', label: 'Client Secret'}
