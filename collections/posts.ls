@@ -1,2 +1,2 @@
-#root = exports ? this
-#root.Accounts = new Meteor.Collection('accounts')
+root = exports ? this
+root.Machines = new Meteor.Collection('machines')

@@ -4,5 +4,11 @@ template(name='index')
     p
       | This is a template for a simple marketing or informational website. It includes a large callout called a jumbotron and three supporting pieces of content. Use it as a starting point to create something more unique.
     p
-      a.btn.btn-primary.btn-lg(href='https://cloud.digitalocean.com/v1/oauth/authorize?client_id=ba7690c54b256ff7482d2de387f7737d02a3e59f8516f1c2faf228b7269339a2&redirect_uri=http%3A%2F%2F127.0.0.1%3A3000%2Fdigitalocean%2Foauthcallback&response_type=code&scope=read write', role='button') Try it now! &raquo;
       +loginButtons
+  a.btn.btn-primary.btn-lg#createVM Create_Machine
+  &nbsp;
+  a.btn.btn-danger.btn-lg#removeVM Remove_Machine
+  &nbsp;
+  a.btn.btn-info.btn-lg#userInfo User_Information
+  &nbsp;
+  a.btn.btn-info.btn-lg#imageInfo Image_Information

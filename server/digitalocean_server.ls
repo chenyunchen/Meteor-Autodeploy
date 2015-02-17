@@ -5,7 +5,6 @@ OAuth.registerService('digitalocean', 2, null, (query)->
   result = getAccessToken(query)
   accessToken = result.access_token
   identity = result.info
-  console.log identity
   return {
     serviceData:
       id: result.uid
