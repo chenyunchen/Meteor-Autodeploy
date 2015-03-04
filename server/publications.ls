@@ -35,35 +35,55 @@ Meteor.methods({
 
 Meteor.methods({
   'createVM': (data)->
-    user =  Meteor.user()
-    HTTP.call('POST','https://api.digitalocean.com/v2/droplets',
-      {
+    user = Meteor.user()
+    response = Meteor.sync (done)->
+      HTTP.call('POST','https://api.digitalocean.com/v2/droplets',
         headers:
-          'Authorization': 'Bearer ' + user.services.digitalocean.accessToken
+          'Authorization': 'Bearer ' +  user.services.digitalocean.accessToken
           'Content-Type': 'application/json'
-        data:
-          name: data.vmName
-          region: data.vmRegion
-          size: data.vmSize
-          image: data.vmImage
-      }
-      (error,result)->
-        if !error
-          console.log result
-    )
+        data: data
+        (err,res)->
+          if not err
+            done(null,res)
+          else
+            throw new Meteor.Error(500, err)
+      )
+    return response.result
 })
 
 Meteor.methods({
-  'deleteVM': (id)->
-    user =  Meteor.user()
-    HTTP.call('DELETE','https://api.digitalocean.com/v2/droplets/'+id,
-      headers:
-        'Authorization': 'Bearer ' +  user.services.digitalocean.accessToken
-        'Content-Type': 'application/x-www-form-urlencoded'
-      (error,result)->
-        if !error
-          console.log result
-    )
+  'powerOnVM': (data)->
+    console.log 'on'
+    user = Meteor.user()
+    response = Meteor.sync (done)->
+      HTTP.call('POST','https://api.digitalocean.com/v2/droplets/'+data.id+'/actions',
+        headers:
+          'Authorization': 'Bearer ' + user.services.digitalocean.accessToken
+          'Content-Type': 'application/json'
+        data: data.action
+        (err,res)->
+          if not err
+            console.log res
+            done(null,res)
+          else
+            throw new Meteor.Error(500, err)
+      )
+    return response.result
+})
+
+Meteor.methods({
+  'removeVM': (id)->
+    user = Meteor.user()
+    response = Meteor.sync (done)->
+      HTTP.call('DELETE','https://api.digitalocean.com/v2/droplets/'+id,
+        headers:
+          'Authorization': 'Bearer ' +  user.services.digitalocean.accessToken
+          'Content-Type': 'application/x-www-form-urlencoded'
+        (err,res)->
+          if not err
+            done(null,res)
+      )
+    return response.result
 })
 
 Meteor.methods({
@@ -73,18 +93,60 @@ Meteor.methods({
 })
 
 Meteor.methods({
-  'imageInfo': ->
+  'userVMInfo': ->
     user = Meteor.user()
-    data = Meteor.sync (done)->
-      HTTP.call('GET','https://api.digitalocean.com/v2/images',
+    response = Meteor.sync (done)->
+      HTTP.call('GET','https://api.digitalocean.com/v2/droplets',
+        headers:
+          'Authorization': 'Bearer ' +  user.services.digitalocean.accessToken
+          'Content-Type': 'application/json'
+        (err,res)->
+          if not err
+            data = EJSON.parse(res.content)
+            vm = data.droplets
+            console.log vm
+            done(null,vm)
+          else
+            throw new Meteor.Error(500, err)
+      )
+    return response.result
+})
+
+Meteor.methods({
+  'distributionInfo': ->
+    distribution = []
+    user = Meteor.user()
+    response = Meteor.sync (done)->
+      HTTP.call('GET','https://api.digitalocean.com/v2/images?type=distribution',
         headers:
           'Authorization': 'Bearer ' +  user.services.digitalocean.accessToken
           'Content-Type': 'application/x-www-form-urlencoded'
         (err,res)->
           if not err
-            done(null,res)
+            data = EJSON.parse(res.content)
+            images = data.images
+            done(null,images)
           else
             throw new Meteor.Error(500, err)
       )
-    return data.result
+    return response.result
+})
+
+Meteor.methods({
+  'applicationInfo': ->
+    user = Meteor.user()
+    response = Meteor.sync (done)->
+      HTTP.call('GET','https://api.digitalocean.com/v2/images?type=application',
+        headers:
+          'Authorization': 'Bearer ' +  user.services.digitalocean.accessToken
+          'Content-Type': 'application/x-www-form-urlencoded'
+        (err,res)->
+          if not err
+            data = EJSON.parse(res.content)
+            images = data.images
+            done(null,images)
+          else
+            throw new Meteor.Error(500, err)
+      )
+    return response.result
 })

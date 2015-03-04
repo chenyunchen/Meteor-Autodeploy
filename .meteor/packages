@@ -22,3 +22,6 @@ service-configuration
 accounts-base
 accounts-oauth
 dessix:livescript-compiler
+mrt:q
+d3
+chrismbeckett:toastr
