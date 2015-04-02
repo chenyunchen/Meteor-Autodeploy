@@ -25,3 +25,5 @@ dessix:livescript-compiler
 mrt:q
 d3
 chrismbeckett:toastr
+tomi:upload-server
+tomi:upload-jquery

@@ -1,0 +1,102 @@
+.mui-flat-button {
+
+  cubic-bezier(0.23, 1, 0.32, 1);
+  .mui-font-style-button {
+    font-size: 14px;
+    line-height: 20px;
+    padding-top: 5px;
+    margin-bottom: 15px;
+    letter-spacing: 0;
+    text-transform: uppercase;
+    font-weight: 500;
+    color: rgba(0, 0, 0, 0.87);
+}
+  border-radius: 2px;
+  user-select: none;
+
+  position: relative;
+  overflow: hidden;
+  background-color: #ffffff;
+  color: rgba(0, 0, 0, 0.87);
+  line-height: 36px;
+  min-width: 88px;
+  padding: 0;
+  margin: 0;
+
+  //This is need so that ripples do not bleed
+  //past border radius.
+  //See: http://stackoverflow.com/questions/17298739/css-overflow-hidden-not-working-in-chrome-when-parent-has-border-radius-and-chil
+  transform: translate3d(0, 0, 0);
+
+  .mui-touch-ripple {
+    .mui-ripple-circle-inner {
+      background-color: rgba(0,0,0,0.1);
+    }
+  }
+
+  .mui-focus-ripple {
+    .mui-focus-ripple-inner {
+      background-color: fade(rgba(0,0,0,0.1), 7%);
+    }
+  }
+
+  .mui-flat-button-label {
+    position: relative;
+    padding: 0 16px;
+  }
+
+  &:hover,
+  &.mui-is-keyboard-focused {
+    background-color: darken(#ffffff, 10%);
+  }
+
+  &.mui-is-disabled {
+    color: fade(#ffffff, 30%);
+
+    &:hover {
+      background-color: inherit;
+    }
+  }
+
+  &.mui-is-primary {
+    color: #f48fb1;
+
+    &:hover,
+    &.mui-is-keyboard-focused {
+      background-color: lighten(#f48fb1, 32%);
+    }
+
+    .mui-touch-ripple {
+      .mui-ripple-circle-inner {
+        background-color: fade(#f48fb1, 20%);
+      }
+    }
+
+    .mui-focus-ripple {
+      .mui-focus-ripple-inner {
+        background-color: fade(#f48fb1, 40%);
+      }
+    }
+  }
+
+  &.mui-is-secondary {
+    color: #00bcd4;
+
+    &:hover,
+    &.mui-is-keyboard-focused {
+      background-color: lighten(#00bcd4, 52%);
+    }
+
+    .mui-touch-ripple {
+      .mui-ripple-circle-inner {
+        background-color: fade(#00bcd4, 20%);
+      }
+    }
+
+    .mui-focus-ripple {
+      .mui-focus-ripple-inner {
+        background-color: fade(#00bcd4, 40%);
+      }
+    }
+  }
+}

@@ -1,4 +1,10 @@
 showData = []
+#new ReactiveVar
+#new ReactiveDict
+#new Mongo.Collection null
+#x = Dep.dependency()
+#x.changed()
+#  ...
 drawhexagon = []
 vm = []
 Template.index.rendered = ->
@@ -120,7 +126,7 @@ Template.index.events({
       region: 'sgp1'
       size: '512mb'
       image: 10581649
-      ssh_keys: null
+      ssh_keys: [722957]
       backups: false
       ipv6: true
       user_data: null
@@ -128,6 +134,7 @@ Template.index.events({
     }
     Meteor.call 'createVM', data, (err,res)->
       if not err
+        console.log res
         data = {
           id: res.data.droplet.id
           name: res.data.droplet.name
@@ -204,6 +211,46 @@ Template.index.events({
             create_at: i.created_at
           }
           showData.push applicationInfo
+      else
+        console.log err
+
+  'click a#showSSHKey': (e,t)->
+    Meteor.call 'showSSHKey', (err,res)->
+      if not err
+        message = res['ssh_keys'][0]
+        console.log message
+      else
+        console.log err
+
+  'click a#addSSHKey': (e,t)->
+    data = {
+        name: 'yun'
+        public_key: 'local'
+    }
+    Meteor.call 'addSSHKey', data, (err,res)->
+      if not err
+        console.log res
+      else
+        console.log err
+
+  'click a#execSSH': (e,t)->
+    data = {
+        script: 'sudo docker run --volume=/:/rootfs:ro --volume=/var/run:/var/run:rw --volume=/sys:/sys:ro --volume=/var/lib/docker/:/var/lib/docker:ro --publish=8080:8080 --detach=true --name=cadvisor google/cadvisor:latest'
+        key: '/Users/yunchen/.ssh/id_rsa'
+        host: '128.199.203.246'
+        port: 22
+        user: 'root'
+    }
+    Meteor.call 'execSSH', data, (err,res)->
+      if not err
+        console.log res
+      else
+        console.log err
+
+  'click a#test': (e,t)->
+    Meteor.call 'test1', (err,res)->
+      if not err
+        console.log res
       else
         console.log err
 })

@@ -1,0 +1,15 @@
+template(name = 'create')
+  .form-group
+    label Virtual Machine Hostname
+    input.form-control(type = 'text', placeholder = 'Name to your VM')
+  .form-group
+    .dropdown
+      button.btn.btn-default.dropdown-toggle(type='button', data-toggle = 'dropdown', aria-expanded = 'true')
+        | test
+        span.caret
+      ul.dropdown-menu(role = 'menu', aria-labelledby = 'dropdownMenu1')
+        li(role = 'presentation')
+          a(role = 'menuitem', tabindex = '-1') abc
+        li(role = 'presentation')
+          a(role = 'menuitem', tabindex = '-1') abc
+  {{> upload_bootstrap }}
