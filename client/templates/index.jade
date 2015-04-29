@@ -1,31 +1,96 @@
-template(name='index')
-  .jumbotron
-    h1 Digital Ocean Monitor
-    p
-      | This is a template for a simple marketing or informational website. It includes a large callout called a jumbotron and three supporting pieces of content. Use it as a starting point to create something more unique.
-    p
-      +loginButtons
-  a.btn.btn-primary.btn-lg#createVM Create_Machine
-  &nbsp;
-  a.btn.btn-danger.btn-lg#removeVM Remove_Machine
-  &nbsp;
-  a.btn.btn-info.btn-lg#powerOnVM PowerOn_Machine
-  br
-  br
-  a.btn.btn-info.btn-lg#userInfo User_Information
-  &nbsp;
-  a.btn.btn-danger.btn-lg#userVMInfo UserVM_Information
-  br
-  br
-  a.btn.btn-info.btn-lg#distributionInfo Distribution_Information
-  &nbsp;
-  a.btn.btn-info.btn-lg#applicationInfo Application_Information
-  br
-  br
-  a.btn.btn-info.btn-lg#showSSHKey Show_SSHKey
-  &nbsp;
-  a.btn.btn-info.btn-lg#addSSHKey Add_SSHKey
-  br
-  br
-  a.btn.btn-info.btn-lg#execSSH Exec_SSH
-  #chart
+template(name = 'index')
+  #index-banner.parallax-container
+    .section.no-pad-bot
+      .container
+        br
+        br
+        h1.header.center.yellow-text.text-accent-4 VirtualMachine AutoDeploy
+        .row.center
+          h5.header.col.s12.light A simple way to manange your machine and control easily every moment
+        .row.center
+          a#download-button.btn-large.waves-effect.waves-light.teal.lighten-1(href='#') Get Started
+        br
+        br
+    .parallax
+      img(src='/background1.jpg', alt='Unsplashed background img 2')
+  .container
+    .section
+      // Icon Section
+      .row
+        .col.s12.m4
+          .icon-block
+            h2.center.brown-text
+              i.mdi-image-flash-on
+            h5.center Speeds up development
+            p.light
+              | We did most of the heavy lifting for you to provide a default stylings that incorporate our custom components. Additionally, we refined animations and transitions to provide a smoother experience for developers.
+        .col.s12.m4
+          .icon-block
+            h2.center.brown-text
+              i.mdi-social-group
+            h5.center User Experience Focused
+            p.light
+              | By utilizing elements and principles of Material Design, we were able to create a framework that incorporates components and animations that provide more feedback to users. Additionally, a single underlying responsive system across all platforms allow for a more unified user experience.
+        .col.s12.m4
+          .icon-block
+            h2.center.brown-text
+              i.mdi-action-settings
+            h5.center Easy to work with
+            p.light
+              | We have provided detailed documentation as well as specific code examples to help new users get started. We are also always open to feedback and can answer any questions a user may have about Materialize.
+  .parallax-container.valign-wrapper
+    .section.no-pad-bot
+      .container
+        .row.center
+          h5.header.col.s12.light A modern responsive front-end framework based on Material Design
+    .parallax
+      img(src='/background3.jpg', alt='Unsplashed background img 2')
+  .container
+    .section
+      .row
+        .col.s12.center
+          h3
+            i.mdi-content-send.brown-text
+          h4 About
+          p.left-align.light
+            | This is a template for a simple marketing or informational website. It includes a large callout called a jumbotron and three supporting pieces of content. Use it as a starting point to create something more unique.
+  .parallax-container.valign-wrapper
+    .section.no-pad-bot
+      .container
+        .row.center
+          h5.header.col.s12.light A modern responsive front-end framework based on Material Design
+    .parallax
+      img(src='/background2.jpg', alt='Unsplashed background img 3')
+  footer.page-footer.teal
+    .container
+      .row
+        .col.l6.s12
+          h5.white-text Company Bio
+          p.grey-text.text-lighten-4
+            | We are a team of college students working on this project like it's our full time job. Any amount would help support and continue development on this project and is greatly appreciated.
+        .col.l3.s12
+          h5.white-text Settings
+          ul
+            li
+              a.white-text(href='#!') Link 1
+            li
+              a.white-text(href='#!') Link 2
+            li
+              a.white-text(href='#!') Link 3
+            li
+              a.white-text(href='#!') Link 4
+        .col.l3.s12
+          h5.white-text Connect
+          ul
+            li
+              a.white-text(href='#!') Link 1
+            li
+              a.white-text(href='#!') Link 2
+            li
+              a.white-text(href='#!') Link 3
+            li
+              a.white-text(href='#!') Link 4
+    .footer-copyright
+      .container
+        | Made by
+        a.brown-text.text-lighten-3(href='http://materializecss.com') Materialize

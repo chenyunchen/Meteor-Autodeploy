@@ -10,7 +10,6 @@ meteorhacks:npm
 
 npm-container
 cryptoquick:jade
-mizzao:bootstrap-3
 accounts-ui
 oauth
 oauth2
@@ -27,3 +26,5 @@ d3
 chrismbeckett:toastr
 tomi:upload-server
 tomi:upload-jquery
+d0minikk:materialize-meteor
+jquery

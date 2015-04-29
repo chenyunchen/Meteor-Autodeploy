@@ -8,6 +8,8 @@ showData = []
 drawhexagon = []
 vm = []
 Template.index.rendered = ->
+  $('.button-collapse').sideNav()
+  $('.parallax').parallax()
   #The color of each hexagon
   #Function to call when you mouseover a node
   color = ['#0072E3','#00DB00','#D9B300','#CE0000']
@@ -253,4 +255,17 @@ Template.index.events({
         console.log res
       else
         console.log err
+
+  'click a#getCPU': (e,t)->
+    data = {
+      host: '128.199.226.157'
+      port: 8080
+    }
+    setInterval(->
+      Meteor.call 'getVMCPU', data, (err,res)->
+        if not err
+          console.log res
+        else
+          console.log err
+    , 2000)
 })
