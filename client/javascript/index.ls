@@ -10,6 +10,7 @@ vm = []
 Template.index.rendered = ->
   $('.button-collapse').sideNav()
   $('.parallax').parallax()
+  $(".dropdown-button").dropdown()
   #The color of each hexagon
   #Function to call when you mouseover a node
   color = ['#0072E3','#00DB00','#D9B300','#CE0000']

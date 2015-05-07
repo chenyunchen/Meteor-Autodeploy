@@ -26,5 +26,5 @@ d3
 chrismbeckett:toastr
 tomi:upload-server
 tomi:upload-jquery
-d0minikk:materialize-meteor
 jquery
+materialize:materialize

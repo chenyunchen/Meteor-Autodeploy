@@ -36,42 +36,48 @@ Meteor.methods({
     runWebsite = 'docker run -d -p '+port+':'+port+' -t website'
 })
 
+getVMCPU = (data)->
+  host = data.host
+  port = 8080
+  defer = Q.defer()
+  HTTP.call('GET','http://'+host+':'+port+'/api/v1.2/docker',
+    (error,result)->
+      if !error
+        data = JSON.parse result.content
+        all = []
+        for container of data
+          containerInfo = data[container]
+          name = containerInfo.aliases[0]
+          if name isnt 'cadvisor'
+            cur = containerInfo.stats[containerInfo.stats.length-1]
+            prev = containerInfo.stats[containerInfo.stats.length-2]
+            rawUsage = cur.cpu.usage.total - prev.cpu.usage.total
+            curdate = new Date(cur.timestamp)
+            prevdate = new Date(prev.timestamp)
+            interval = (curdate.getTime() - prevdate.getTime())*1000000
+            cpuUsage = Math.round((rawUsage/interval)*100)
+            #console.log containerInfo.spec.memory.limit
+            memoryUsage = Math.round((cur.memory.usage/1042317312)*100)
+            networkReceive = Math.round((cur.network['rx_bytes'] - prev.network['rx_bytes'])/(interval/1000000000))
+            networkTransfer = Math.round((cur.network['tx_bytes'] - prev.network['tx_bytes'])/(interval/1000000000))
+            if cpuUsage > 100
+              cpuUsage = 100
+            usage = {
+              name: name
+              cpuUsage: cpuUsage
+              memoryUsage: memoryUsage
+              networkReceive: networkReceive
+              networkTransfer: networkTransfer
+            }
+            all.push(usage)
+        defer.resolve(all)
+  )
+  return defer.promise
+
 Meteor.methods({
-  'getVMCPU': (data)->
-    host = data.host
-    port = data.port
+  'getStatus': (data)->
     response = Meteor.sync (done)->
-      HTTP.call('GET','http://'+host+':'+port+'/api/v1.2/docker',
-        (error,result)->
-          if !error
-            data = JSON.parse result.content
-            all = []
-            for container of data
-              containerInfo = data[container]
-              name = containerInfo.aliases[0]
-              if name isnt 'cadvisor'
-                cur = containerInfo.stats[containerInfo.stats.length-1]
-                prev = containerInfo.stats[containerInfo.stats.length-2]
-                rawUsage = cur.cpu.usage.total - prev.cpu.usage.total
-                curdate = new Date(cur.timestamp)
-                prevdate = new Date(prev.timestamp)
-                interval = (curdate.getTime() - prevdate.getTime())*1000000
-                cpuUsage = Math.round((rawUsage/interval)*100)
-                #console.log containerInfo.spec.memory.limit
-                memoryUsage = Math.round((cur.memory.usage/1042317312)*100)
-                networkReceive = Math.round((cur.network['rx_bytes'] - prev.network['rx_bytes'])/(interval/1000000000))
-                networkTransfer = Math.round((cur.network['tx_bytes'] - prev.network['tx_bytes'])/(interval/1000000000))
-                if cpuUsage > 100
-                  cpuUsage = 100
-                usage = {
-                  name: name
-                  cpuUsage: cpuUsage
-                  memoryUsage: memoryUsage
-                  networkReceive: networkReceive
-                  networkTransfer: networkTransfer
-                }
-                all.push(usage)
-            done(null,all)
-      )
+      getVMCPU(data).then (result)->
+        done(null,result)
     return response.result
 })

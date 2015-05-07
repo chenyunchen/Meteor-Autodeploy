@@ -8,3 +8,9 @@ Router.map ->
   this.route 'create', {
     path: '/create'
   }
+  this.route 'deployVM', {
+    path: '/deploy/vm'
+  }
+  this.route 'account', {
+    path: '/account'
+  }

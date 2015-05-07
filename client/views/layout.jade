@@ -1,12 +1,42 @@
 template(name='layout')
+  ul#dropdown1.dropdown-content
+    li
+      a(href='#',style='color:#444') Deploy Service
+    li
+      a(href='/deploy/vm',style='color:#444') Deploy VM
   nav.white(role='navigation')
     .nav-wrapper.container
-      a#logo-container.brand-logo(href='#')
+      a#logo-container.brand-logo(href='/')
         i.mdi-file-cloud-queue
-        | AutoDeploy
+          | AutoDeploy
+      ul.right.hide-on-med-and-down
+        li
+          a.waves-effect(href='#')
+            | About
+        li
+          a.waves-effect.dropdown-button(href='#',data-activates='dropdown1')
+            | Virtual Machine
+            i.mdi-navigation-arrow-drop-down.right
+        li
+          a.waves-effect(href='/account')
+            | Account
+        li
+          +loginButtons
       ul#nav-mobile.side-nav
         li
           +loginButtons
+        li
+          a.collapsible-header.waves-effect(href='#')
+            | About
+        li
+          a.collapsible-header.waves-effect(href='/deploy')
+            | Deploy
+        li
+          a.collapsible-header.waves-effect(href='#')
+            | Account
+
+
+
       a.button-collapse(href='#', data-activates='nav-mobile')
         i.mdi-navigation-menu
   +yield
