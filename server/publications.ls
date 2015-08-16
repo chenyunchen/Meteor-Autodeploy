@@ -9,7 +9,7 @@ Meteor.methods({
             if err
               defer.reject()
             stream.on('exit', (code, signal)->
-              done(null,'ok')
+              done(null,true)
             ).on('close', ->
               conn.end()
             )
@@ -47,29 +47,29 @@ getVMCPU = (data)->
         all = []
         for container of data
           containerInfo = data[container]
+          id = containerInfo.aliases[1]
           name = containerInfo.aliases[0]
-          if name isnt 'cadvisor'
-            cur = containerInfo.stats[containerInfo.stats.length-1]
-            prev = containerInfo.stats[containerInfo.stats.length-2]
-            rawUsage = cur.cpu.usage.total - prev.cpu.usage.total
-            curdate = new Date(cur.timestamp)
-            prevdate = new Date(prev.timestamp)
-            interval = (curdate.getTime() - prevdate.getTime())*1000000
-            cpuUsage = Math.round((rawUsage/interval)*100)
-            #console.log containerInfo.spec.memory.limit
-            memoryUsage = Math.round((cur.memory.usage/1042317312)*100)
-            networkReceive = Math.round((cur.network['rx_bytes'] - prev.network['rx_bytes'])/(interval/1000000000))
-            networkTransfer = Math.round((cur.network['tx_bytes'] - prev.network['tx_bytes'])/(interval/1000000000))
-            if cpuUsage > 100
-              cpuUsage = 100
-            usage = {
-              name: name
-              cpuUsage: cpuUsage
-              memoryUsage: memoryUsage
-              networkReceive: networkReceive
-              networkTransfer: networkTransfer
-            }
-            all.push(usage)
+          cur = containerInfo.stats[containerInfo.stats.length-1]
+          prev = containerInfo.stats[containerInfo.stats.length-2]
+          rawUsage = cur.cpu.usage.total - prev.cpu.usage.total
+          curdate = new Date(cur.timestamp)
+          prevdate = new Date(prev.timestamp)
+          interval = (curdate.getTime() - prevdate.getTime())*1000000
+          cpuUsage = Math.round((rawUsage/interval)*100)
+          memoryUsage = Math.round((cur.memory.usage/1042317312)*100)
+          networkReceive = Math.round((cur.network['rx_bytes'] - prev.network['rx_bytes'])/(interval/1000000000))
+          networkTransfer = Math.round((cur.network['tx_bytes'] - prev.network['tx_bytes'])/(interval/1000000000))
+          if cpuUsage > 100
+            cpuUsage = 100
+          usage = {
+            id: id
+            name: name
+            cpuUsage: cpuUsage
+            memoryUsage: memoryUsage
+            networkReceive: networkReceive
+            networkTransfer: networkTransfer
+          }
+          all.push(usage)
         defer.resolve(all)
   )
   return defer.promise

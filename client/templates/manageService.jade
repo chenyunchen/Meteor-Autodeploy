@@ -1,0 +1,44 @@
+template(name = 'manageService')
+  #modal1.modal.bottom-sheet
+    .modal-content
+      h4 Docker Service
+      ul.collection
+        each userVMServiceInfo
+          li.collection-item.avatar
+            i.mdi-action-assessment.circle.green
+            span.title {{name}}
+            p cpuUsage: {{cpuUsage}}% memoryUsage:{{memoryUsage}}% networkReceive: {{networkReceive}}Bytes newworkTransfer: {{networkTransfer}}Bytes
+            a#service.secondary-content(href='#',serviceId='{{id}}')
+              i.mdi-navigation-close.grey-text
+  .container
+    .section
+      a.title(href='') My Virtual Machine
+      .row
+        each userVMInfo
+          .col.s12.m4
+            .card
+              .card-image.waves-effect.waves-block.waves-light
+                a#status(href='#')
+                  img.modal-trigger.responsive-img.wp-post-image(src='/ubuntu.png', alt='ubuntu', title='{{id}}')
+              .card-content
+                p.area
+                  span.card-title.activator.brown-text.text-darken-4 {{name}}
+                    i.mdi-navigation-more-vert.right
+                a(href='http://www.ubuntu.com/') {{image.slug}}
+              .card-reveal
+                span.card-title.brown-text.text-darken-4
+                  i.mdi-navigation-more-vert.right
+                p.area
+                  a.waves-effect.waves-orange.btn-flat
+                    | CPU: {{vcpus}}core
+                  a.waves-effect.waves-orange.btn-flat
+                    | Memory: {{memory}}MB
+                  a.waves-effect.waves-orange.btn-flat
+                    | Disk: {{disk}}GB
+                  a.waves-effect.waves-orange.btn-flat
+                    | Region: {{region.name}}
+                  a.waves-effect.waves-orange.btn-flat
+                    each networks.v4
+                      | IP: {{ip_address}}
+                  a.waves-effect.waves-orange.btn-flat
+                    | Status: {{status}}

@@ -1,9 +1,13 @@
 template(name='layout')
   ul#dropdown1.dropdown-content
     li
-      a(href='#',style='color:#444') Deploy Service
+      a(href='/deploy/service',style='color:#444') Cloud Service
     li
-      a(href='/deploy/vm',style='color:#444') Deploy VM
+      a(href='/deploy/vm',style='color:#444') Cloud VM
+    li
+      a(href='#',style='color:#444') Cloud Backup
+    li
+      a(href='/manage/service',style='color:#444') Manage Service
   nav.white(role='navigation')
     .nav-wrapper.container
       a#logo-container.brand-logo(href='/')
@@ -39,4 +43,20 @@ template(name='layout')
 
       a.button-collapse(href='#', data-activates='nav-mobile')
         i.mdi-navigation-menu
+  .fixed-action-btn(style='bottom: 24px; right: 24px;')
+    a.btn-floating.btn-large.red.waves-effect.waves-light
+      i.large.mdi-content-add
+    ul
+      li
+        a.btn-floating.red
+          i.large.mdi-editor-insert-chart
+      li
+        a.btn-floating.yellow.darken-1
+          i.large.mdi-communication-email
+      li
+        a.btn-floating.green
+          i.large.mdi-communication-forum
+      li
+        a.btn-floating.blue
+          i.large.mdi-action-help
   +yield

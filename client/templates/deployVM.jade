@@ -1,179 +1,183 @@
 template(name = 'deployVM')
-  .container
-    .section
-      .row
-        .col.s12
-          ul.tabs
-            li.tab.col.s3
-              a.active(href='#test1') 1. First Step
-            li.tab.col.s3
-              a(href='#test2') 2. Second Step
-            li.tab.col.s3
-              a(href='#test3') 3. Third Step
-            li.tab.col.s3
-              a(href='#test4') 4. Fourth Step
+  if clicked
+    .container
       .section
-        a.title(href='') Distributions
         .row
-          .col.s12.m4
-            .card
-              .card-image.waves-effect.waves-block.waves-light
-                a(href='#')
-                  img.responsive-img.wp-post-image(src='/ubuntu.png', alt='ubuntu', title='ubuntu')
-              .card-content
-                p.area
-                  span.card-title.activator.brown-text.text-darken-4 14.04 x64
+          .col.s12
+            ul.tabs
+              li.tab.col.s3
+                a#test1.active(href='#test1') 1. First Step
+              li.tab.col.s3
+                a#test2(href='#test2') 2. Second Step
+              li.tab.col.s3
+                a#test3(href='#test3') 3. Third Step
+              li.tab.col.s3
+                a#test4(href='#test4') 4. Fourth Step
+        .section
+          a.title(href='') Distributions
+          .row
+            .col.s12.m4
+              .card
+                .card-image.waves-effect.waves-block.waves-light
+                  a(href='#')
+                    img.responsive-img.wp-post-image(src='/ubuntu.png', alt='ubuntu', title='ubuntu')
+                .card-content
+                  p.area
+                    span.card-title.activator.brown-text.text-darken-4 14.04 x64
+                      i.mdi-navigation-more-vert.right
+                  a(href='http://www.ubuntu.com/') Ubuntu
+                .card-reveal
+                  span.card-title.brown-text.text-darken-4
                     i.mdi-navigation-more-vert.right
-                a(href='http://www.ubuntu.com/') Ubuntu
-              .card-reveal
-                span.card-title.brown-text.text-darken-4
-                  i.mdi-navigation-more-vert.right
-                p.area
-                  a.waves-effect.waves-orange.btn-flat(style='width: 100%')
-                    | 15.04 x64
-                    i.mdi-action-done.right.grey-text.text-lighten-2
-                  a.waves-effect.waves-orange.btn-flat(style='width: 100%')
-                    | 15.04 x32
-                    i.mdi-action-done.right.grey-text.text-lighten-2
-                  a.waves-effect.waves-orange.btn-flat(style='width: 100%')
-                    | 14.10 x64
-                    i.mdi-action-done.right.grey-text.text-lighten-2
-                  a.waves-effect.waves-orange.btn-flat(style='width: 100%')
-                    | 14.10 x32
-                    i.mdi-action-done.right.grey-text.text-lighten-2
-                  a.waves-effect.waves-orange.btn-flat(style='width: 100%')
-                    | 14.04 x64
-                    i.mdi-action-done.right.light-green-text.text-accent-4
-                  a.waves-effect.waves-orange.btn-flat(style='width: 100%')
-                    | 14.04 x32
-                    i.mdi-action-done.right.grey-text.text-lighten-2
-                  a.waves-effect.waves-orange.btn-flat(style='width: 100%')
-                    | 12.04.5 x64
-                    i.mdi-action-done.right.grey-text.text-lighten-2
-                  a.waves-effect.waves-orange.btn-flat(style='width: 100%')
-                    | 14.04.5 x32
-                    i.mdi-action-done.right.grey-text.text-lighten-2
-          .col.s12.m4
-            .card
-              .card-image.waves-effect.waves-block.waves-light
-                a(href='#')
-                  img.responsive-img.wp-post-image(src='/freebsd.png', alt='freebsd', title='freebsd')
-              .card-content
-                p.area
-                  span.card-title.activator.brown-text.text-darken-4 10.01
+                  p.area
+                    a.waves-effect.waves-orange.btn-flat(style='width: 100%')
+                      | 15.04 x64
+                      i.mdi-action-done.right.grey-text.text-lighten-2
+                    a.waves-effect.waves-orange.btn-flat(style='width: 100%')
+                      | 15.04 x32
+                      i.mdi-action-done.right.grey-text.text-lighten-2
+                    a.waves-effect.waves-orange.btn-flat(style='width: 100%')
+                      | 14.10 x64
+                      i.mdi-action-done.right.grey-text.text-lighten-2
+                    a.waves-effect.waves-orange.btn-flat(style='width: 100%')
+                      | 14.10 x32
+                      i.mdi-action-done.right.grey-text.text-lighten-2
+                    a.waves-effect.waves-orange.btn-flat(style='width: 100%')
+                      | 14.04 x64
+                      i.mdi-action-done.right.light-green-text.text-accent-4
+                    a.waves-effect.waves-orange.btn-flat(style='width: 100%')
+                      | 14.04 x32
+                      i.mdi-action-done.right.grey-text.text-lighten-2
+                    a.waves-effect.waves-orange.btn-flat(style='width: 100%')
+                      | 12.04.5 x64
+                      i.mdi-action-done.right.grey-text.text-lighten-2
+                    a.waves-effect.waves-orange.btn-flat(style='width: 100%')
+                      | 14.04.5 x32
+                      i.mdi-action-done.right.grey-text.text-lighten-2
+            .col.s12.m4
+              .card
+                .card-image.waves-effect.waves-block.waves-light
+                  a(href='#')
+                    img.responsive-img.wp-post-image(src='/freebsd.png', alt='freebsd', title='freebsd')
+                .card-content
+                  p.area
+                    span.card-title.activator.brown-text.text-darken-4 10.01
+                      i.mdi-navigation-more-vert.right
+                  a(href='https://www.freebsd.org/') Freebsd
+                .card-reveal
+                  span.card-title.brown-text.text-darken-4
                     i.mdi-navigation-more-vert.right
-                a(href='https://www.freebsd.org/') Freebsd
-              .card-reveal
-                span.card-title.brown-text.text-darken-4
-                  i.mdi-navigation-more-vert.right
-                p.area
-                  a.waves-effect.waves-orange.btn-flat(style='width: 100%')
-                    | 10.01
-                    i.mdi-action-done.right.light-green-text.text-accent-4
-          .col.s12.m4
-            .card
-              .card-image.waves-effect.waves-block.waves-light
-                a(href='#')
-                  img.responsive-img.wp-post-image(src='/fedora.png', alt='fedora', title='fedora')
-              .card-content
-                p.area
-                  span.card-title.activator.brown-text.text-darken-4 21 x64
+                  p.area
+                    a.waves-effect.waves-orange.btn-flat(style='width: 100%')
+                      | 10.01
+                      i.mdi-action-done.right.light-green-text.text-accent-4
+            .col.s12.m4
+              .card
+                .card-image.waves-effect.waves-block.waves-light
+                  a(href='#')
+                    img.responsive-img.wp-post-image(src='/fedora.png', alt='fedora', title='fedora')
+                .card-content
+                  p.area
+                    span.card-title.activator.brown-text.text-darken-4 21 x64
+                      i.mdi-navigation-more-vert.right
+                  a(href='https://getfedora.org/') Fedora
+                .card-reveal
+                  span.card-title.brown-text.text-darken-4
                     i.mdi-navigation-more-vert.right
-                a(href='https://getfedora.org/') Fedora
-              .card-reveal
-                span.card-title.brown-text.text-darken-4
-                  i.mdi-navigation-more-vert.right
-                p.area
-                  a.waves-effect.waves-orange.btn-flat(style='width: 100%')
-                    | 21 x64
-                    i.mdi-action-done.right.light-green-text.text-accent-4
-                  a.waves-effect.waves-orange.btn-flat(style='width: 100%')
-                    | 20 x64
-                    i.mdi-action-done.right.grey-text.text-lighten-2
-                  a.waves-effect.waves-orange.btn-flat(style='width: 100%')
-                    | 20 x32
-                    i.mdi-action-done.right.grey-text.text-lighten-2
-          .col.s12.m4
-            .card
-              .card-image.waves-effect.waves-block.waves-light
-                a(href='#')
-                  img.responsive-img.wp-post-image(src='/debian.png', alt='debian', title='debian')
-              .card-content
-                p.area
-                  span.card-title.activator.brown-text.text-darken-4 8.0 x64
+                  p.area
+                    a.waves-effect.waves-orange.btn-flat(style='width: 100%')
+                      | 21 x64
+                      i.mdi-action-done.right.light-green-text.text-accent-4
+                    a.waves-effect.waves-orange.btn-flat(style='width: 100%')
+                      | 20 x64
+                      i.mdi-action-done.right.grey-text.text-lighten-2
+                    a.waves-effect.waves-orange.btn-flat(style='width: 100%')
+                      | 20 x32
+                      i.mdi-action-done.right.grey-text.text-lighten-2
+            .col.s12.m4
+              .card
+                .card-image.waves-effect.waves-block.waves-light
+                  a(href='#')
+                    img.responsive-img.wp-post-image(src='/debian.png', alt='debian', title='debian')
+                .card-content
+                  p.area
+                    span.card-title.activator.brown-text.text-darken-4 8.0 x64
+                      i.mdi-navigation-more-vert.right
+                  a(href='https://www.debian.org/') Debian
+                .card-reveal
+                  span.card-title.brown-text.text-darken-4
                     i.mdi-navigation-more-vert.right
-                a(href='https://www.debian.org/') Debian
-              .card-reveal
-                span.card-title.brown-text.text-darken-4
-                  i.mdi-navigation-more-vert.right
-                p.area
-                  a.waves-effect.waves-orange.btn-flat(style='width: 100%')
-                    | 8.0 x64
-                    i.mdi-action-done.right.light-green-text.text-accent-4
-                  a.waves-effect.waves-orange.btn-flat(style='width: 100%')
-                    | 8.0 x32
-                    i.mdi-action-done.right.grey-text.text-lighten-2
-                  a.waves-effect.waves-orange.btn-flat(style='width: 100%')
-                    | 7.0 x64
-                    i.mdi-action-done.right.grey-text.text-lighten-2
-                  a.waves-effect.waves-orange.btn-flat(style='width: 100%')
-                    | 7.0 x32
-                    i.mdi-action-done.right.grey-text.text-lighten-2
-                  a.waves-effect.waves-orange.btn-flat(style='width: 100%')
-                    | 6.0 x64
-                    i.mdi-action-done.right.grey-text.text-lighten-2
-                  a.waves-effect.waves-orange.btn-flat(style='width: 100%')
-                    | 6.0 x32
-                    i.mdi-action-done.right.grey-text.text-lighten-2
-          .col.s12.m4
-            .card
-              .card-image.waves-effect.waves-block.waves-light
-                a(href='#')
-                  img.responsive-img.wp-post-image(src='/coreos.png', alt='coreos', title='coreos')
-              .card-content
-                p.area
-                  span.card-title.activator.brown-text.text-darken-4 633.1.0 (stable)
+                  p.area
+                    a.waves-effect.waves-orange.btn-flat(style='width: 100%')
+                      | 8.0 x64
+                      i.mdi-action-done.right.light-green-text.text-accent-4
+                    a.waves-effect.waves-orange.btn-flat(style='width: 100%')
+                      | 8.0 x32
+                      i.mdi-action-done.right.grey-text.text-lighten-2
+                    a.waves-effect.waves-orange.btn-flat(style='width: 100%')
+                      | 7.0 x64
+                      i.mdi-action-done.right.grey-text.text-lighten-2
+                    a.waves-effect.waves-orange.btn-flat(style='width: 100%')
+                      | 7.0 x32
+                      i.mdi-action-done.right.grey-text.text-lighten-2
+                    a.waves-effect.waves-orange.btn-flat(style='width: 100%')
+                      | 6.0 x64
+                      i.mdi-action-done.right.grey-text.text-lighten-2
+                    a.waves-effect.waves-orange.btn-flat(style='width: 100%')
+                      | 6.0 x32
+                      i.mdi-action-done.right.grey-text.text-lighten-2
+            .col.s12.m4
+              .card
+                .card-image.waves-effect.waves-block.waves-light
+                  a(href='#')
+                    img.responsive-img.wp-post-image(src='/coreos.png', alt='coreos', title='coreos')
+                .card-content
+                  p.area
+                    span.card-title.activator.brown-text.text-darken-4 633.1.0 (stable)
+                      i.mdi-navigation-more-vert.right
+                  a(href='https://coreos.com/') CoreOS
+                .card-reveal
+                  span.card-title.brown-text.text-darken-4
                     i.mdi-navigation-more-vert.right
-                a(href='https://coreos.com/') CoreOS
-              .card-reveal
-                span.card-title.brown-text.text-darken-4
-                  i.mdi-navigation-more-vert.right
-                p.area
-                  a.waves-effect.waves-orange.btn-flat(style='width: 100%')
-                    | 633.1.0 (stable)
-                    i.mdi-action-done.right.light-green-text.text-accent-4
-                  a.waves-effect.waves-orange.btn-flat(style='width: 100%')
-                    | 647.0.0 (beta)
-                    i.mdi-action-done.right.grey-text.text-lighten-2
-                  a.waves-effect.waves-orange.btn-flat(style='width: 100%')
-                    | 668.2.0 (alpha)
-                    i.mdi-action-done.right.grey-text.text-lighten-2
-          .col.s12.m4
-            .card
-              .card-image.waves-effect.waves-block.waves-light
-                a(href='#')
-                  img.responsive-img.wp-post-image(src='/centos.png', alt='centos', title='centos')
-              .card-content
-                p.area
-                  span.card-title.activator.brown-text.text-darken-4 7 x64
+                  p.area
+                    a.waves-effect.waves-orange.btn-flat(style='width: 100%')
+                      | 633.1.0 (stable)
+                      i.mdi-action-done.right.light-green-text.text-accent-4
+                    a.waves-effect.waves-orange.btn-flat(style='width: 100%')
+                      | 647.0.0 (beta)
+                      i.mdi-action-done.right.grey-text.text-lighten-2
+                    a.waves-effect.waves-orange.btn-flat(style='width: 100%')
+                      | 668.2.0 (alpha)
+                      i.mdi-action-done.right.grey-text.text-lighten-2
+            .col.s12.m4
+              .card
+                .card-image.waves-effect.waves-block.waves-light
+                  a(href='#')
+                    img.responsive-img.wp-post-image(src='/centos.png', alt='centos', title='centos')
+                .card-content
+                  p.area
+                    span.card-title.activator.brown-text.text-darken-4 7 x64
+                      i.mdi-navigation-more-vert.right
+                  a(href='https://www.centos.org/') CentOS
+                .card-reveal
+                  span.card-title.brown-text.text-darken-4
                     i.mdi-navigation-more-vert.right
-                a(href='https://www.centos.org/') CentOS
-              .card-reveal
-                span.card-title.brown-text.text-darken-4
-                  i.mdi-navigation-more-vert.right
-                p.area
-                  a.waves-effect.waves-orange.btn-flat(style='width: 100%')
-                    | 7 x64
-                    i.mdi-action-done.right.light-green-text.text-accent-4
-                  a.waves-effect.waves-orange.btn-flat(style='width: 100%')
-                    | 6.5 x64
-                    i.mdi-action-done.right.grey-text.text-lighten-2
-                  a.waves-effect.waves-orange.btn-flat(style='width: 100%')
-                    | 6.5 x32
-                    i.mdi-action-done.right.grey-text.text-lighten-2
-                  a.waves-effect.waves-orange.btn-flat(style='width: 100%')
-                    | 5.10 x64
-                    i.mdi-action-done.right.grey-text.text-lighten-2
-                  a.waves-effect.waves-orange.btn-flat(style='width: 100%')
-                    | 5.10 x32
-                    i.mdi-action-done.right.grey-text.text-lighten-2
+                  p.area
+                    a.waves-effect.waves-orange.btn-flat(style='width: 100%')
+                      | 7 x64
+                      i.mdi-action-done.right.light-green-text.text-accent-4
+                    a.waves-effect.waves-orange.btn-flat(style='width: 100%')
+                      | 6.5 x64
+                      i.mdi-action-done.right.grey-text.text-lighten-2
+                    a.waves-effect.waves-orange.btn-flat(style='width: 100%')
+                      | 6.5 x32
+                      i.mdi-action-done.right.grey-text.text-lighten-2
+                    a.waves-effect.waves-orange.btn-flat(style='width: 100%')
+                      | 5.10 x64
+                      i.mdi-action-done.right.grey-text.text-lighten-2
+                    a.waves-effect.waves-orange.btn-flat(style='width: 100%')
+                      | 5.10 x32
+                      i.mdi-action-done.right.grey-text.text-lighten-2
+  else
+    p
+      | helloworld

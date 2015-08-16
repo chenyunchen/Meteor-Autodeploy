@@ -1,0 +1,48 @@
+template(name = 'deployService')
+  #modal.modal.modal-fixed-footer
+    .modal-content
+      h4 My Virtual Machine
+      p
+        ul.collection
+          each vm
+            li#select.collection-item.avatar(vmId='{{id}}')
+              i.mdi-action-assessment.circle.green
+              span.title {{name}}
+              p CPU: {{vcpus}}core Memory: {{memory}}MB Disk: {{disk}}GB OS: {{image.distribution}}
+    .modal-footer
+      a.modal-action.modal-close.waves-effect.waves-green.btn-flat Cancel
+      a#confirm.modal-action.modal-close.waves-effect.waves-green.btn-flat Confirm
+  #index-banner.parallax-container(style="background-image: url('/dockerbg.png');no-repeat;center;center;fixed;background-size: cover;z-index:-1")
+    .section.no-pad-bot
+      .container
+  .section.no-pad-bot(style='margin-top: -5%')
+    .row
+      .col.offset-l1.l10.s12.white.z-depth-1
+        article#post-5.post-5.page.type-page.status-publish.hentry
+          .col.l2.m4.s6
+            img.responsive-img(src='/docker.png')
+          .entry-content
+            .col.l10.m8.s12
+              span.grey-text
+                h4.grey-text.darken-2.light Docker Service Support
+                h5.grey-text.darken-2.light Deploy Your Application
+                p
+                  a.waves-effect.waves-light.btn.light-green.darken-1(href='#')
+                    i.mdi-file-attachment.left
+                    | Upload Dockerfile
+                  &nbsp;
+                  a.waves-effect.waves-light.btn.teal(href='#')
+                    i.mdi-file-folder-open.left
+                    | Upload files
+                h5.grey-text.darken-2.light Choose Service What You Want
+                .collection
+                  a#status1.collection-item Virtual Machine Moniter
+                  a#status2.collection-item IPython Notebook Environment
+                p.grey-text.darken-3
+                  | Docker is an open platform for developers and sysadmins to build, ship, and run distributed applications. Consisting of Docker Engine, a portable, lightweight runtime and packaging tool, and Docker Hub, a cloud service for sharing applications and automating workflows, Docker enables apps to be quickly assembled from components and eliminates the friction between development, QA, and production environments. As a result, IT can ship faster and run the same app, unchanged, on laptops, data center VMs, and any cloud.
+                p.grey-text.darken-3
+                  | Docker helps developers build and ship higher-quality applications, faster.
+                p
+                  a#new.waves-effect.waves-light.btn.light-blue.darken-3(href='#modal')
+                    i.mdi-content-create.left
+                    | My VM

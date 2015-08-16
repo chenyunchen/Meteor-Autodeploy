@@ -50,7 +50,7 @@ Meteor.methods({
 })
 
 Meteor.methods({
-  'userVMInfo': ->
+ 'userVMInfo':->
     user = Meteor.user()
     response = Meteor.sync (done)->
       HTTP.call('GET','https://api.digitalocean.com/v2/droplets',
@@ -67,6 +67,7 @@ Meteor.methods({
       )
     return response.result
 })
+
 
 Meteor.methods({
   'powerOnVM': (data)->

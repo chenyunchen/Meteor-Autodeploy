@@ -1,4 +1,9 @@
+Template.deployVM.helpers(
+  clicked:->
+    Session.get('clicked')
+)
 Template.deployVM.rendered =->
+  Session.set('clicked',true)
   $('ul.tabs').tabs()
 Template.deployVM.events({
   'click a#getStatus': (e,t)->
@@ -12,12 +17,13 @@ Template.deployVM.events({
         else
           console.log err
     , 2000)
-  'click  li#test1': (e,t)->
+  'click  a#test1': (e,t)->
     console.log '1'
-  'click  li#test2': (e,t)->
+  'click  a#test2': (e,t)->
+    Session.set('clicked',false)
     console.log '2'
-  'click  li#test3': (e,t)->
+  'click  a#test3': (e,t)->
     console.log '3'
-  'click  li#test4': (e,t)->
+  'click  a#test4': (e,t)->
     console.log '4'
 })

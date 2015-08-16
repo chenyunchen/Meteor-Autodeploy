@@ -2,15 +2,13 @@ Router.configure({
   layoutTemplate: 'layout'
 })
 Router.map ->
-  this.route 'index', {
+  this.route 'index',
     path: '/'
-  }
-  this.route 'create', {
+  this.route 'create',
     path: '/create'
-  }
-  this.route 'deployVM', {
+  this.route 'deployVM',
     path: '/deploy/vm'
-  }
-  this.route 'account', {
-    path: '/account'
-  }
+  this.route 'deployService',
+    path: '/deploy/service'
+  this.route 'manageService',
+    path: '/manage/service'
