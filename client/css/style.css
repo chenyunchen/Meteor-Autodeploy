@@ -57,3 +57,122 @@ p {
 footer.page-footer {
   margin: 0;
 }
+
+
+img.grayscale {
+    filter: url("data:image/svg+xml;utf8,&lt;svg xmlns=\'http://www.w3.org/2000/svg\'&gt;&lt;filter id=\'grayscale\'&gt;&lt;feColorMatrix type=\'matrix\' values=\'0.3333 0.3333 0.3333 0 0 0.3333 0.3333 0.3333 0 0 0.3333 0.3333 0.3333 0 0 0 0 0 1 0\'/&gt;&lt;/filter&gt;&lt;/svg&gt;#grayscale"); /* Firefox 10+, Firefox on Android */
+    filter: gray; /* IE6-9 */
+    -webkit-filter: grayscale(100%); /* Chrome 19+, Safari 6+, Safari 6+ iOS */
+}
+
+.icon {
+  height: 36px;
+  display: inline-block !important;
+  background: url("/service.png");
+}
+
+.freebsdamp {
+  background-position: -530px 5px;
+}
+
+.mean {
+  background-position: -994px 5px;
+}
+
+.drone {
+  background-position: -333px 2px;
+}
+
+.ghost {
+  background-position: -596px 5px;
+}
+
+.ror {
+  background-position: -1522px 5px;
+}
+
+.drupal {
+  background-position: -398px 5px;
+}
+
+.cassandra {
+  background-position: 0px 5px;
+}
+
+.elk {
+  background-position: -466px 2px;
+}
+
+.django {
+  background-position: -134px 5px;
+}
+
+.mumble {
+  background-position: -1194px 2px;
+}
+
+.owncloud {
+  background-position: -1324px 5px;
+}
+
+.redis {
+  height: 36px;
+  display: inline-block !important;
+  background: url("/redis.png");
+}
+
+.joomla {
+  background-position: -728px 5px;
+}
+
+.magento {
+  background-position: -928px 5px;
+}
+
+.mongodb {
+  background-position: -1128px 2px;
+}
+
+.node {
+  background-position: -1258px 5px;
+}
+
+.docker {
+  background-position: -200px 5px;
+}
+
+.lemp {
+  background-position: -862px 5px;
+}
+
+.lamp {
+  background-position: -796px 5px;
+}
+
+.mediawiki {
+  background-position: -1062px 2px;
+}
+
+.wordpress {
+  background-position: -1588px 5px;
+}
+
+.dokku {
+  background-position: -266px 5px;
+}
+
+.gitlab {
+  background-position: -662px 5px;
+}
+
+.phpmyadmin {
+  background-position: -1392px 2px;
+}
+
+.redmine {
+  background-position: -1456px 5px;
+}
+
+.selectBtn {
+  width: 100%;
+}

@@ -1,27 +1,24 @@
-fs = Meteor.npmRequire('fs')
-Meteor.methods({
-  execSSH: (data)->
-    response = Meteor.sync (done)->
-        connection = Meteor.npmRequire('ssh2');
-        conn = new connection();
-        conn.on('ready', ->
-          conn.exec(data.script, (err, stream)->
-            if err
-              defer.reject()
-            stream.on('exit', (code, signal)->
-              done(null,true)
-            ).on('close', ->
-              conn.end()
-            )
+execSSH: (data)->
+  response = Meteor.sync (done)->
+      connection = Meteor.npmRequire('ssh2');
+      conn = new connection();
+      conn.on('ready', ->
+        conn.exec(data.script, (err, stream)->
+          if err
+            defer.reject()
+          stream.on('exit', (code, signal)->
+            done(null,true)
+          ).on('close', ->
+            conn.end()
           )
-        ).connect({
-          host: data.host,
-          port: data.port
-          username: data.user
-          privateKey: fs.readFileSync(data.key, 'utf-8')
-        });
-    return response.result
-})
+        )
+      ).connect({
+        host: data.host,
+        port: data.port
+        username: data.user
+        privateKey: fs.readFileSync(data.key, 'utf-8')
+      });
+  return response.result
 
 Meteor.methods({
   'createRoute': ->

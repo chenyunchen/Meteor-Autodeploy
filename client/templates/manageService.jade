@@ -42,3 +42,5 @@ template(name = 'manageService')
                       | IP: {{ip_address}}
                   a.waves-effect.waves-orange.btn-flat
                     | Status: {{status}}
+                .card-action
+                  a#deleteVM.waves-effect.waves-light.btn.red(style='color:white',vmId='{{id}}') Delete this machine

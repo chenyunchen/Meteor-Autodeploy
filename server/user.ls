@@ -43,7 +43,6 @@ Meteor.methods({
           'Content-Type': 'application/x-www-form-urlencoded'
         (err,res)->
           if not err
-            console.log res
             done(null,res)
       )
     return response.result
@@ -109,8 +108,6 @@ Meteor.methods({
 Meteor.methods({
   'addSSHKey': (data)->
     user = Meteor.user()
-    if data['public_key'] is 'local'
-          data['public_key'] = fs.readFileSync('/Users/yunchen/.ssh/id_rsa.pub', 'utf-8')
     response = Meteor.sync (done)->
       HTTP.call('POST','https://api.digitalocean.com/v2/account/keys',
         headers:
@@ -125,4 +122,9 @@ Meteor.methods({
             throw new Meteor.Error(500, err)
       )
     return response.result
+})
+
+Meteor.methods({
+  'dockerfileUpload': (data)->
+    console.log data
 })

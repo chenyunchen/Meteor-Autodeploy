@@ -1,4 +1,14 @@
 template(name = 'deployService')
+  #dockerfileModal.modal.modal-fixed-footer
+    .modal-content
+      h4 Custom Your Dockerfile
+      .input-field.col.s12
+        textarea#dockerfile.materialize-textarea
+        label(for='dockerfile')
+          | Dockerfile
+    .modal-footer
+      a.modal-action.modal-close.waves-effect.waves-green.btn-flat Cancel
+      a#dockerfileCreate.modal-action.modal-close.waves-effect.waves-green.btn-flat Create Image
   #modal.modal.modal-fixed-footer
     .modal-content
       h4 My Virtual Machine
@@ -27,13 +37,13 @@ template(name = 'deployService')
                 h4.grey-text.darken-2.light Docker Service Support
                 h5.grey-text.darken-2.light Deploy Your Application
                 p
-                  a.waves-effect.waves-light.btn.light-green.darken-1(href='#')
+                  a#popDockerfile.waves-effect.waves-light.btn.light-green.darken-1(href='#')
                     i.mdi-file-attachment.left
-                    | Upload Dockerfile
+                    | Custom Your Dockerfile
                   &nbsp;
                   a.waves-effect.waves-light.btn.teal(href='#')
                     i.mdi-file-folder-open.left
-                    | Upload files
+                    | Insert shell
                 h5.grey-text.darken-2.light Choose Service What You Want
                 .collection
                   a#status1.collection-item Virtual Machine Moniter

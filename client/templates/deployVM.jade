@@ -1,183 +1,520 @@
 template(name = 'deployVM')
-  if clicked
-    .container
-      .section
+  #modal.modal.modal-fixed-footer
+    .modal-content
+      h4 Add ssh key
+      .input-field.col.s12
+        input#keyName.validate(type='text')
+        label(for='keyName') SSH Key Name
+      .input-field.col.s12
+        textarea#inputSSHKey.materialize-textarea(length='500')
+        label(for='inputSSHKey')
+          | SSH Public Key
+    .modal-footer
+      a.modal-action.modal-close.waves-effect.waves-green.btn-flat Cancel
+      a#createKey.modal-action.modal-close.waves-effect.waves-green.btn-flat Create
+  .container
+    .section
+      .row
+        .col.s12
+          ul.tabs
+            li.tab.col.s3
+              a.active(href='#step1') 1. Select Distributions
+            li.tab.col.s3
+              a#clickStep2(href='#step2') 2. Select Applications
+            li.tab.col.s3
+              a#clickStep3(href='#step3') 3. Fill the Form
+      .section#step1
+        a.title(href='') Distributions
         .row
-          .col.s12
-            ul.tabs
-              li.tab.col.s3
-                a#test1.active(href='#test1') 1. First Step
-              li.tab.col.s3
-                a#test2(href='#test2') 2. Second Step
-              li.tab.col.s3
-                a#test3(href='#test3') 3. Third Step
-              li.tab.col.s3
-                a#test4(href='#test4') 4. Fourth Step
-        .section
-          a.title(href='') Distributions
-          .row
-            .col.s12.m4
-              .card
-                .card-image.waves-effect.waves-block.waves-light
-                  a(href='#')
-                    img.responsive-img.wp-post-image(src='/ubuntu.png', alt='ubuntu', title='ubuntu')
-                .card-content
-                  p.area
-                    span.card-title.activator.brown-text.text-darken-4 14.04 x64
-                      i.mdi-navigation-more-vert.right
-                  a(href='http://www.ubuntu.com/') Ubuntu
-                .card-reveal
-                  span.card-title.brown-text.text-darken-4
+          .col.s12.m4
+            .card
+              .card-image.waves-effect.waves-block.waves-light
+                a(href='#')
+                  img.responsive-img.wp-post-image(src='/ubuntu.png', alt='ubuntu', title='ubuntu')
+              .card-content
+                p.area
+                  span.card-title.activator.brown-text.text-darken-4 14.04 x64
                     i.mdi-navigation-more-vert.right
-                  p.area
-                    a.waves-effect.waves-orange.btn-flat(style='width: 100%')
-                      | 15.04 x64
-                      i.mdi-action-done.right.grey-text.text-lighten-2
-                    a.waves-effect.waves-orange.btn-flat(style='width: 100%')
-                      | 15.04 x32
-                      i.mdi-action-done.right.grey-text.text-lighten-2
-                    a.waves-effect.waves-orange.btn-flat(style='width: 100%')
-                      | 14.10 x64
-                      i.mdi-action-done.right.grey-text.text-lighten-2
-                    a.waves-effect.waves-orange.btn-flat(style='width: 100%')
-                      | 14.10 x32
-                      i.mdi-action-done.right.grey-text.text-lighten-2
-                    a.waves-effect.waves-orange.btn-flat(style='width: 100%')
-                      | 14.04 x64
-                      i.mdi-action-done.right.light-green-text.text-accent-4
-                    a.waves-effect.waves-orange.btn-flat(style='width: 100%')
-                      | 14.04 x32
-                      i.mdi-action-done.right.grey-text.text-lighten-2
-                    a.waves-effect.waves-orange.btn-flat(style='width: 100%')
-                      | 12.04.5 x64
-                      i.mdi-action-done.right.grey-text.text-lighten-2
-                    a.waves-effect.waves-orange.btn-flat(style='width: 100%')
-                      | 14.04.5 x32
-                      i.mdi-action-done.right.grey-text.text-lighten-2
-            .col.s12.m4
-              .card
-                .card-image.waves-effect.waves-block.waves-light
-                  a(href='#')
-                    img.responsive-img.wp-post-image(src='/freebsd.png', alt='freebsd', title='freebsd')
-                .card-content
-                  p.area
-                    span.card-title.activator.brown-text.text-darken-4 10.01
-                      i.mdi-navigation-more-vert.right
-                  a(href='https://www.freebsd.org/') Freebsd
-                .card-reveal
-                  span.card-title.brown-text.text-darken-4
+                a(href='http://www.ubuntu.com/') Ubuntu
+              .card-reveal
+                span.card-title.brown-text.text-darken-4
+                  i.mdi-navigation-more-vert.right
+                p.area
+                  a.waves-effect.waves-orange.btn-flat(style='width: 100%')
+                    | 15.04 x64
+                    i.mdi-action-done.right.grey-text.text-lighten-2
+                  a.waves-effect.waves-orange.btn-flat(style='width: 100%')
+                    | 15.04 x32
+                    i.mdi-action-done.right.grey-text.text-lighten-2
+                  a.waves-effect.waves-orange.btn-flat(style='width: 100%')
+                    | 14.10 x64
+                    i.mdi-action-done.right.grey-text.text-lighten-2
+                  a.waves-effect.waves-orange.btn-flat(style='width: 100%')
+                    | 14.10 x32
+                    i.mdi-action-done.right.grey-text.text-lighten-2
+                  a#default.waves-effect.waves-orange.btn-flat(style='width: 100%')
+                    | 14.04 x64
+                    i.mdi-action-done.right.light-green-text.text-accent-4
+                  a.waves-effect.waves-orange.btn-flat(style='width: 100%')
+                    | 14.04 x32
+                    i.mdi-action-done.right.grey-text.text-lighten-2
+                  a.waves-effect.waves-orange.btn-flat(style='width: 100%')
+                    | 12.04.5 x64
+                    i.mdi-action-done.right.grey-text.text-lighten-2
+                  a.waves-effect.waves-orange.btn-flat(style='width: 100%')
+                    | 14.04.5 x32
+                    i.mdi-action-done.right.grey-text.text-lighten-2
+          .col.s12.m4
+            .card
+              .card-image.waves-effect.waves-block.waves-light
+                a(href='#')
+                  img.grayscale.responsive-img.wp-post-image(src='/freebsd.png', alt='freebsd', title='freebsd')
+              .card-content
+                p.area
+                  span.card-title.activator.brown-text.text-darken-4 10.01
                     i.mdi-navigation-more-vert.right
-                  p.area
-                    a.waves-effect.waves-orange.btn-flat(style='width: 100%')
-                      | 10.01
-                      i.mdi-action-done.right.light-green-text.text-accent-4
-            .col.s12.m4
-              .card
-                .card-image.waves-effect.waves-block.waves-light
-                  a(href='#')
-                    img.responsive-img.wp-post-image(src='/fedora.png', alt='fedora', title='fedora')
-                .card-content
-                  p.area
-                    span.card-title.activator.brown-text.text-darken-4 21 x64
-                      i.mdi-navigation-more-vert.right
-                  a(href='https://getfedora.org/') Fedora
-                .card-reveal
-                  span.card-title.brown-text.text-darken-4
+                a(href='https://www.freebsd.org/') Freebsd
+              .card-reveal
+                span.card-title.brown-text.text-darken-4
+                  i.mdi-navigation-more-vert.right
+                p.area
+                  a.waves-effect.waves-orange.btn-flat(style='width: 100%')
+                    | 10.01
+                    i.mdi-action-done.right.grey-text.text-lighten-2
+          .col.s12.m4
+            .card
+              .card-image.waves-effect.waves-block.waves-light
+                a(href='#')
+                  img.grayscale.responsive-img.wp-post-image(src='/fedora.png', alt='fedora', title='fedora')
+              .card-content
+                p.area
+                  span.card-title.activator.brown-text.text-darken-4 21 x64
                     i.mdi-navigation-more-vert.right
-                  p.area
-                    a.waves-effect.waves-orange.btn-flat(style='width: 100%')
-                      | 21 x64
-                      i.mdi-action-done.right.light-green-text.text-accent-4
-                    a.waves-effect.waves-orange.btn-flat(style='width: 100%')
-                      | 20 x64
-                      i.mdi-action-done.right.grey-text.text-lighten-2
-                    a.waves-effect.waves-orange.btn-flat(style='width: 100%')
-                      | 20 x32
-                      i.mdi-action-done.right.grey-text.text-lighten-2
-            .col.s12.m4
-              .card
-                .card-image.waves-effect.waves-block.waves-light
-                  a(href='#')
-                    img.responsive-img.wp-post-image(src='/debian.png', alt='debian', title='debian')
-                .card-content
-                  p.area
-                    span.card-title.activator.brown-text.text-darken-4 8.0 x64
-                      i.mdi-navigation-more-vert.right
-                  a(href='https://www.debian.org/') Debian
-                .card-reveal
-                  span.card-title.brown-text.text-darken-4
+                a(href='https://getfedora.org/') Fedora
+              .card-reveal
+                span.card-title.brown-text.text-darken-4
+                  i.mdi-navigation-more-vert.right
+                p.area
+                  a.waves-effect.waves-orange.btn-flat(style='width: 100%')
+                    | 21 x64
+                    i.mdi-action-done.right.grey-text.text-lighten-2
+                  a.waves-effect.waves-orange.btn-flat(style='width: 100%')
+                    | 20 x64
+                    i.mdi-action-done.right.grey-text.text-lighten-2
+                  a.waves-effect.waves-orange.btn-flat(style='width: 100%')
+                    | 20 x32
+                    i.mdi-action-done.right.grey-text.text-lighten-2
+          .col.s12.m4
+            .card
+              .card-image.waves-effect.waves-block.waves-light
+                a(href='#')
+                  img.grayscale.responsive-img.wp-post-image(src='/debian.png', alt='debian', title='debian')
+              .card-content
+                p.area
+                  span.card-title.activator.brown-text.text-darken-4 8.0 x64
                     i.mdi-navigation-more-vert.right
-                  p.area
-                    a.waves-effect.waves-orange.btn-flat(style='width: 100%')
-                      | 8.0 x64
-                      i.mdi-action-done.right.light-green-text.text-accent-4
-                    a.waves-effect.waves-orange.btn-flat(style='width: 100%')
-                      | 8.0 x32
-                      i.mdi-action-done.right.grey-text.text-lighten-2
-                    a.waves-effect.waves-orange.btn-flat(style='width: 100%')
-                      | 7.0 x64
-                      i.mdi-action-done.right.grey-text.text-lighten-2
-                    a.waves-effect.waves-orange.btn-flat(style='width: 100%')
-                      | 7.0 x32
-                      i.mdi-action-done.right.grey-text.text-lighten-2
-                    a.waves-effect.waves-orange.btn-flat(style='width: 100%')
-                      | 6.0 x64
-                      i.mdi-action-done.right.grey-text.text-lighten-2
-                    a.waves-effect.waves-orange.btn-flat(style='width: 100%')
-                      | 6.0 x32
-                      i.mdi-action-done.right.grey-text.text-lighten-2
-            .col.s12.m4
-              .card
-                .card-image.waves-effect.waves-block.waves-light
-                  a(href='#')
-                    img.responsive-img.wp-post-image(src='/coreos.png', alt='coreos', title='coreos')
-                .card-content
-                  p.area
-                    span.card-title.activator.brown-text.text-darken-4 633.1.0 (stable)
-                      i.mdi-navigation-more-vert.right
-                  a(href='https://coreos.com/') CoreOS
-                .card-reveal
-                  span.card-title.brown-text.text-darken-4
+                a(href='https://www.debian.org/') Debian
+              .card-reveal
+                span.card-title.brown-text.text-darken-4
+                  i.mdi-navigation-more-vert.right
+                p.area
+                  a.waves-effect.waves-orange.btn-flat(style='width: 100%')
+                    | 8.0 x64
+                    i.mdi-action-done.right.grey-text.text-lighten-2
+                  a.waves-effect.waves-orange.btn-flat(style='width: 100%')
+                    | 8.0 x32
+                    i.mdi-action-done.right.grey-text.text-lighten-2
+                  a.waves-effect.waves-orange.btn-flat(style='width: 100%')
+                    | 7.0 x64
+                    i.mdi-action-done.right.grey-text.text-lighten-2
+                  a.waves-effect.waves-orange.btn-flat(style='width: 100%')
+                    | 7.0 x32
+                    i.mdi-action-done.right.grey-text.text-lighten-2
+                  a.waves-effect.waves-orange.btn-flat(style='width: 100%')
+                    | 6.0 x64
+                    i.mdi-action-done.right.grey-text.text-lighten-2
+                  a.waves-effect.waves-orange.btn-flat(style='width: 100%')
+                    | 6.0 x32
+                    i.mdi-action-done.right.grey-text.text-lighten-2
+          .col.s12.m4
+            .card
+              .card-image.waves-effect.waves-block.waves-light
+                a(href='#')
+                  img.grayscale.responsive-img.wp-post-image(src='/coreos.png', alt='coreos', title='coreos')
+              .card-content
+                p.area
+                  span.card-title.activator.brown-text.text-darken-4 633.1.0 (stable)
                     i.mdi-navigation-more-vert.right
-                  p.area
-                    a.waves-effect.waves-orange.btn-flat(style='width: 100%')
-                      | 633.1.0 (stable)
-                      i.mdi-action-done.right.light-green-text.text-accent-4
-                    a.waves-effect.waves-orange.btn-flat(style='width: 100%')
-                      | 647.0.0 (beta)
-                      i.mdi-action-done.right.grey-text.text-lighten-2
-                    a.waves-effect.waves-orange.btn-flat(style='width: 100%')
-                      | 668.2.0 (alpha)
-                      i.mdi-action-done.right.grey-text.text-lighten-2
-            .col.s12.m4
-              .card
-                .card-image.waves-effect.waves-block.waves-light
-                  a(href='#')
-                    img.responsive-img.wp-post-image(src='/centos.png', alt='centos', title='centos')
-                .card-content
-                  p.area
-                    span.card-title.activator.brown-text.text-darken-4 7 x64
-                      i.mdi-navigation-more-vert.right
-                  a(href='https://www.centos.org/') CentOS
-                .card-reveal
-                  span.card-title.brown-text.text-darken-4
+                a(href='https://coreos.com/') CoreOS
+              .card-reveal
+                span.card-title.brown-text.text-darken-4
+                  i.mdi-navigation-more-vert.right
+                p.area
+                  a.waves-effect.waves-orange.btn-flat(style='width: 100%')
+                    | 633.1.0 (stable)
+                    i.mdi-action-done.right.grey-text.text-lighten-2
+                  a.waves-effect.waves-orange.btn-flat(style='width: 100%')
+                    | 647.0.0 (beta)
+                    i.mdi-action-done.right.grey-text.text-lighten-2
+                  a.waves-effect.waves-orange.btn-flat(style='width: 100%')
+                    | 668.2.0 (alpha)
+                    i.mdi-action-done.right.grey-text.text-lighten-2
+          .col.s12.m4
+            .card
+              .card-image.waves-effect.waves-block.waves-light
+                a(href='#')
+                  img.grayscale.responsive-img.wp-post-image(src='/centos.png', alt='centos', title='centos')
+              .card-content
+                p.area
+                  span.card-title.activator.brown-text.text-darken-4 7 x64
                     i.mdi-navigation-more-vert.right
-                  p.area
-                    a.waves-effect.waves-orange.btn-flat(style='width: 100%')
-                      | 7 x64
-                      i.mdi-action-done.right.light-green-text.text-accent-4
-                    a.waves-effect.waves-orange.btn-flat(style='width: 100%')
-                      | 6.5 x64
-                      i.mdi-action-done.right.grey-text.text-lighten-2
-                    a.waves-effect.waves-orange.btn-flat(style='width: 100%')
-                      | 6.5 x32
-                      i.mdi-action-done.right.grey-text.text-lighten-2
-                    a.waves-effect.waves-orange.btn-flat(style='width: 100%')
-                      | 5.10 x64
-                      i.mdi-action-done.right.grey-text.text-lighten-2
-                    a.waves-effect.waves-orange.btn-flat(style='width: 100%')
-                      | 5.10 x32
-                      i.mdi-action-done.right.grey-text.text-lighten-2
-  else
-    p
-      | helloworld
+                a(href='https://www.centos.org/') CentOS
+              .card-reveal
+                span.card-title.brown-text.text-darken-4
+                  i.mdi-navigation-more-vert.right
+                p.area
+                  a.waves-effect.waves-orange.btn-flat(style='width: 100%')
+                    | 7 x64
+                    i.mdi-action-done.right.grey-text.text-lighten-2
+                  a.waves-effect.waves-orange.btn-flat(style='width: 100%')
+                    | 6.5 x64
+                    i.mdi-action-done.right.grey-text.text-lighten-2
+                  a.waves-effect.waves-orange.btn-flat(style='width: 100%')
+                    | 6.5 x32
+                    i.mdi-action-done.right.grey-text.text-lighten-2
+                  a.waves-effect.waves-orange.btn-flat(style='width: 100%')
+                    | 5.10 x64
+                    i.mdi-action-done.right.grey-text.text-lighten-2
+                  a.waves-effect.waves-orange.btn-flat(style='width: 100%')
+                    | 5.10 x32
+                    i.mdi-action-done.right.grey-text.text-lighten-2
+      .section#step2
+        a.title(href='') Applications
+        ul.collapsible(data-collapsible='accordion')
+          li
+            .collapsible-header
+              | FreeBSD AMP on FreeBSD 10.1
+              i.icon.freebsdamp
+            .collapsible-body
+              p
+               | FreeBSD is an advanced computer operating system used to power modern servers. Its advanced networking, security, and storage features have made FreeBSD the platform of choice for many of the busiest websites and most pervasive embedded networking and storage devices. Use the one-click image to deploy a FreeBSD Server with Apache, MySQL, and PHP pre-installed.
+              button#select.selectBtn.btn.waves-effect.waves-light.red.accent-1(type='submit',appId='10163059')
+                | Select
+          li
+            .collapsible-header
+              | MEAN on Ubuntu 14.04
+              i.icon.mean
+            .collapsible-body
+              p
+               | MEAN.JS helps you build robust and maintainable production web applications using MongoDB, Express, AngularJS, and Node.js. Avoid useless grunt work and common pitfalls while keeping your application organized.
+              button#select.selectBtn.btn.waves-effect.waves-light.red.accent-1(type='submit',appId='11146864')
+                | Select
+          li
+            .collapsible-header
+              | Drone on Ubuntu 14.04
+              i.icon.drone
+            .collapsible-body
+              p
+               | Don’t let bugs invade your code. Install Drone on your cloud server and integrate seamlessly with Github, Bitbucket, and Google Code to make setup quick and easy. You’ll get full control over your build environment’s setup and configuration, and for custom deployments you can use SSH and shell scripts.
+              button#select.selectBtn.btn.waves-effect.waves-light.red.accent-1(type='submit',appId='11774848')
+                | Select
+          li
+            .collapsible-header
+              | Ghost 0.6.4 on Ubuntu 14.04
+              i.icon.ghost
+            .collapsible-body
+              p
+               | Ghost is a beautifully designed platform that provides a simple and elegant way to share your story with the world. Create and publish your own blog with tools that make it easy and fun.
+              button#select.selectBtn.btn.waves-effect.waves-light.red.accent-1(type='submit',appId='12035275')
+                | Select
+          li
+            .collapsible-header
+              | Ruby on Rails on Ubuntu 14.04
+              i.icon.ror
+            .collapsible-body
+              p
+               | Ruby on Rails is an open-source web framework that makes applications easier to develop and understand. Write beautiful code by favoring convention over configuration for sustainable productivity.
+              button#select.selectBtn.btn.waves-effect.waves-light.red.accent-1(type='submit',appId='12035706')
+                | Select
+          li
+            .collapsible-header
+              | Drupal 7.38 on Rails on Ubuntu 14.04
+              i.icon.drupal
+            .collapsible-body
+              p
+               | One-click install Drupal and build everything from personal blogs to enterprise applications. With thousands of add-on modules and designs, this popular CMS helps you bring your content to life with limitless possibilities.
+              button#select.selectBtn.btn.waves-effect.waves-light.red.accent-1(type='submit',appId='12394820')
+                | Select
+          li
+            .collapsible-header
+              | Cassandra on Rails on Ubuntu 14.04
+              i.icon.cassandra
+            .collapsible-body
+              p
+               | Apache Cassandra is an open source distributed database management system designed to handle large amounts of data across many commodity servers, providing high availability with no single point of failure. Cassandra offers robust support for clusters spanning multiple datacenters, with asynchronous masterless replication allowing low latency operations for all clients.
+              button#select.selectBtn.btn.waves-effect.waves-light.red.accent-1(type='submit',appId='12540744')
+                | Select
+          li
+            .collapsible-header
+              | ELK Logging Stack on Ubuntu 14.04
+              i.icon.elk
+            .collapsible-body
+              p
+               | The ELK Stack is made up of three key pieces of software: Elasticsearch, Logstash, and Kibana. Together they allow you to collect, search, and analyze logs files from across your infrastructure. Logstash collects and parses the incoming logs, Elasticsearch indexes them, and Kibana gives you a powerful web interface to visualize the data.
+              button#select.selectBtn.btn.waves-effect.waves-light.red.accent-1(type='submit',appId='12542038')
+                | Select
+          li
+            .collapsible-header
+              | Django on Ubuntu 14.04
+              i.icon.django
+            .collapsible-body
+              p
+               | Django is a high-level Python framework focusing on automating as much as possible, allowing you to develop your web apps quickly. The one-click spins up a development environment built on Nginx, Gunicorn, and Postgres.
+              button#select.selectBtn.btn.waves-effect.waves-light.red.accent-1(type='submit',appId='12740667')
+                | Select
+          li
+            .collapsible-header
+              | Mumble Server (murmur) on Ubuntu 14.04
+              i.icon.mumble
+            .collapsible-body
+              p
+               | Mumble is a voice over IP (VoIP) application primarily designed for use by gamers, similar to programs such as TeamSpeak and Ventrilo.  Mumble uses a client–server architecture which allows users to talk to each other via the same server.
+              button#select.selectBtn.btn.waves-effect.waves-light.red.accent-1(type='submit',appId='12914152')
+                | Select
+          li
+            .collapsible-header
+              | ownCloud 8.1.0 on Ubuntu 14.04
+              i.icon.owncloud
+            .collapsible-body
+              p
+               | ownCloud provides access to your data through a web interface or WebDAV with a platform that makes it easy to view, sync, and share across devices. ownCloud’s open architecture is extensible via a simple but powerful API for applications and plugins and works with any storage.
+              button#select.selectBtn.btn.waves-effect.waves-light.red.accent-1(type='submit',appId='12940941')
+                | Select
+          li
+            .collapsible-header
+              | Redis 3.0.3 on Ubuntu 14.04
+              i.redis
+            .collapsible-body
+              p
+               | Redis is a data structure server. It is open-source, networked, in-memory, and stores keys with optional durability. The development of Redis has been sponsored by Redis Labs since June 2015.
+              button#select.selectBtn.btn.waves-effect.waves-light.red.accent-1(type='submit',appId='13013935')
+                | Select
+          li
+            .collapsible-header
+              | Joomla! 3.4.3 on Ubuntu 14.04
+              i.icon.joomla
+            .collapsible-body
+              p
+               | Joomla is an award-winning content management system. Its ease-of-use and its flexibility have made it one of the most popular web site softwares available. Written in PHP and completely open source, Joomla is an ideal solution for anyone looking to publish web content.
+              button#select.selectBtn.btn.waves-effect.waves-light.red.accent-1(type='submit',appId='13014869')
+                | Select
+          li
+            .collapsible-header
+              | Magento 1.9.2.1 CE on Ubuntu 14.04
+              i.icon.magento
+            .collapsible-body
+              p
+               | The Magento one-click is perfect if you’re a developer who wants to build your own solution on a proven, flexible platform. You can modify the core code and add features and functionality, with extensions from the Magento Connect marketplace. See why more than 200,000 customer sites combine to make Magento the choice of more eCommerce developers.
+              button#select.selectBtn.btn.waves-effect.waves-light.red.accent-1(type='submit',appId='13115155')
+                | Select
+          li
+            .collapsible-header
+              | MongoDB 3.0.5 on Ubuntu 14.04
+              i.icon.mongodb
+            .collapsible-body
+              p
+               | Thousands of startups use MongoDB for their mission-critical applications. It’s the leading NoSQL database, offering a simple and elegant way to help developers scale.
+              button#select.selectBtn.btn.waves-effect.waves-light.red.accent-1(type='submit',appId='13115659')
+                | Select
+          li
+            .collapsible-header
+              | Node.js v0.12.7 on Ubuntu 14.04
+              i.icon.node
+            .collapsible-body
+              p
+               | One-click install Node.js for a lightweight and efficient platform ideal for building fast, scalable network applications. Similar in design to Ruby's Event Machine or Python's Twisted, and built on Chrome's JavaScript runtime, it's ideal for data-intensive apps that run across distributed devices.
+              button#select.selectBtn.btn.waves-effect.waves-light.red.accent-1(type='submit',appId='13115751')
+                | Select
+          li
+            .collapsible-header
+              | Docker 1.8.1 on Ubuntu 14.04
+              i.icon.docker
+            .collapsible-body
+              p
+               | Build, ship, and run distributed applications with Docker. By automating deployment inside software containers, developers and sysadmins can run the same app on laptops, data center VMs, and the cloud.
+              button#select.selectBtn.btn.waves-effect.waves-light.red.accent-1(type='submit',appId='13126928')
+                | Select
+          li
+            .collapsible-header
+              | LEMP on Ubuntu 14.04
+              i.icon.lemp
+            .collapsible-body
+              p
+               | The LEMP stack is a group of open source software to get web servers up and running. Available as a one-click install, get Nginx, MySQL, and PHP-FPM installed on your Droplet in less than a minute.
+              button#select.selectBtn.btn.waves-effect.waves-light.red.accent-1(type='submit',appId='13138234')
+                | Select
+          li
+            .collapsible-header
+              | LAMP on Ubuntu 14.04
+              i.icon.lamp
+            .collapsible-body
+              p
+               | The LAMP stack is our most popular 1-click installation. In less than a minute, spin up a cloud server with Apache, MySQL, and PHP installed.
+              button#select.selectBtn.btn.waves-effect.waves-light.red.accent-1(type='submit',appId='13138235')
+                | Select
+          li
+            .collapsible-header
+              | MediaWiki on Ubuntu 14.04
+              i.icon.mediawiki
+            .collapsible-body
+              p
+               | Join the movement towards free and collaborative knowledge and install your own wiki engine on a DigitalOcean cloud server. Edit directly from the browser and keep a version history for each editable page.
+              button#select.selectBtn.btn.waves-effect.waves-light.red.accent-1(type='submit',appId='13185409')
+                | Select
+          li
+            .collapsible-header
+              | WordPress on Ubuntu 14.04
+              i.icon.wordpress
+            .collapsible-body
+              p
+               | Over 60 million people choose WordPress to power their websites and blogs. Born out of a desire for an elegant personal publishing system built on PHP and MySQL, its potential has evolved to a full content management system.
+              button#select.selectBtn.btn.waves-effect.waves-light.red.accent-1(type='submit',appId='13229890')
+                | Select
+          li
+            .collapsible-header
+              | Dokku 0.3.26 on Ubuntu 14.04
+              i.icon.dokku
+            .collapsible-body
+              p
+               | Dokku makes it a breeze to deploy and manage web applications on your own server. Now available as a one-click installation, it’s even easier to have your own private application platform in a matter of minutes.
+              button#select.selectBtn.btn.waves-effect.waves-light.red.accent-1(type='submit',appId='13283205')
+                | Select
+          li
+            .collapsible-header
+              | GitLab 7.14.1 on Ubuntu 14.04
+              i.icon.gitlab
+            .collapsible-body
+              p
+               | Gitlab’s core belief is that every digital product created by more than one person should be managed in distributed version control in order to achieve optimal results. It offers git repository management, code reviews, issue tracking, activity feeds, and wikis to help people cooperate effectively and achieve better results.
+              button#select.selectBtn.btn.waves-effect.waves-light.red.accent-1(type='submit',appId='13283251')
+                | Select
+          li
+            .collapsible-header
+              | PHPMyAdmin on Ubuntu 14.04
+              i.icon.phpmyadmin
+            .collapsible-body
+              p
+               | phpMyAdmin is a free software tool written in PHP, intended to handle the administration of MySQL over the Web. phpMyAdmin supports a wide range of operations on MySQL and MariaDB. Frequently used operations (managing databases, tables, columns, relations, indexes, users, permissions, etc) can be performed via the user interface, while you still have the ability to directly execute any SQL statement.
+              button#select.selectBtn.btn.waves-effect.waves-light.red.accent-1(type='submit',appId='11730661')
+                | Select
+          li
+            .collapsible-header
+              | Redmine on Ubuntu 14.04
+              i.icon.redmine
+            .collapsible-body
+              p
+               | Redmine is a flexible project management web application that is cross-platform and cross-database. Written using the Ruby on Rails framework, it provides integrated project management features, issue tracking, and support for various version control systems. Spin up a Redmine Droplet to zap bugs and manage your projects.
+              button#select.selectBtn.btn.waves-effect.waves-light.red.accent-1(type='submit',appId='12438838')
+                | Select
+      .section#step3
+        .collection
+          a.collection-item.active
+           i.mdi-action-done.small.red-text
+           | {{appVMName}}
+          a.collection-item
+           | {{appVMContent}}
+        a.title(href='') Form
+        .row
+          .input-field.col.s12
+            input#vmname.validate(type='text')
+            label(for='vmname') Virtual Machine Name
+          br
+          .input-field.col.s12
+            select#selectSize
+              option(value='',disabled,selected) Choose the Size
+              option(value='512mb') 512MB/ 1CPU,  20GB-SSD, 1000GB-Transfer, $5/mon($0.007/hr)
+              option(value='1gb')   1GB/ 1CPU,  30GB-SSD,    2TB-Transfer, $10/mon($0.015/hr)
+              option(value='2gb')   2GB/ 2CPU,  40GB-SSD,    3TB-Transfer, $20/mon($0.030/hr)
+              option(value='4gb')   4GB/ 2CPU,  60GB-SSD,    4TB-Transfer, $40/mon($0.060/hr)
+              option(value='8gb')   8GB/ 4CPU,  80GB-SSD,    5TB-Transfer, $80/mon($0.119/hr)
+              option(value='16gb')  16GB/ 8CPU, 160GB-SSD,    6TB-Transfer, $160/mon($0.238/hr)
+              option(value='32gb')  32GB/12CPU, 320GB-SSD,    7TB-Transfer, $320/mon($0.476/hr)
+              option(value='48gb')  48GB/16CPU, 480GB-SSD,    8TB-Transfer, $480/mon($0.714/hr)
+              option(value='64gb')  64GB/20CPU, 640GB-SSD,    9TB-Transfer, $640/mon($0.952/hr)
+            label Size Select
+          br
+          label Size Region
+          br
+          .col.s12.m4
+            .card.small
+              .card-image
+                img(src='/us.png')
+                span.card-title(style='color:black;font-weight:bold') New York
+              .card-content
+                input#nyc1.with-gap(name='group1',type='radio')
+                label(for='nyc1') Position 1(NYC1)
+                br
+                input#nyc2.with-gap(name='group1',type='radio')
+                label(for='nyc2') Position 2(NYC2)
+                br
+                input#nyc3.with-gap(name='group1',type='radio')
+                label(for='nyc3') Position 3(NYC3)
+          .col.s12.m4
+            .card.small
+              .card-image
+                img(src='/nl.png')
+                span.card-title(style='color:black;font-weight:bold') Amsterdam
+              .card-content
+                input#ams1.with-gap(name='group1',type='radio')
+                label(for='ams1') Position 1(AMS1)
+                br
+                input#ams2.with-gap(name='group1',type='radio')
+                label(for='ams2') Position 2(AMS2)
+                br
+                input#ams3.with-gap(name='group1',type='radio')
+                label(for='ams3') Position 3(AMS3)
+          .col.s12.m4
+            .card.small
+              .card-image
+                img(src='/us.png')
+                span.card-title(style='color:black;font-weight:bold') San Francisco
+              .card-content
+                input#sfo1.with-gap(name='group1',type='radio')
+                label(for='sfo1') Position 1(SFO1)
+          .col.s12.m4
+            .card.small
+              .card-image
+                img(src='/sg.png')
+                span.card-title(style='color:black;font-weight:bold') Singapore
+              .card-content
+                input#sgp1.with-gap(name='group1',type='radio')
+                label(for='sgp1') Position 1(SGP1)
+          .col.s12.m4
+            .card.small
+              .card-image
+                img(src='/gb.png')
+                span.card-title(style='color:black;font-weight:bold') London
+              .card-content
+                input#lon1.with-gap(name='group1',type='radio')
+                label(for='lon1') Position 1(LON1)
+          .col.s12.m4
+            .card.small
+              .card-image
+                img(src='/de.png')
+                span.card-title(style='color:black;font-weight:bold') Frankfurt
+              .card-content
+                input#fra1.with-gap(name='group1',type='radio')
+                label(for='fra1') Position 1(FRA1)
+          label Create a new key
+          br
+          button#addKeyPOP.btn-flat.waves-effect.waves-light(type='submit',name='action')
+            i.large.mdi-content-add
+            | Add ssh key
+          br
+          label or select a key...
+          br
+          .collection
+            each keys
+              a#selectKey.collection-item(keyId='{{id}}') {{name}}
+          br
+          a#finish.waves-effect.waves-light.btn Finish

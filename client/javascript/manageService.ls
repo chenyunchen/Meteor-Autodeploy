@@ -1,5 +1,3 @@
-
-
 Template.manageService.helpers(
   userVMInfo:->
     Session.get('userVMInfo')
@@ -46,8 +44,20 @@ Template.manageService.events({
       user: 'root'
     }
     Meteor.call 'execSSH', data, (err,res)->
-        if not err
-            Materialize.toast('Service Delete Success!', 4000)
-        else
-            console.log err
+      if not err
+          Materialize.toast('Service Delete Success!', 4000)
+      else
+          console.log err
+  'click a#deleteVM': (e,t)->
+    id = e.target.attributes.vmid.value
+    userVMInfo = Session.get('userVMInfo')
+    Meteor.call 'removeVM', id, (err,res)->
+      if not err
+        for vm,index in userVMInfo
+          if vm.id is parseInt(id)
+            userVMInfo.splice(index,1)
+            break
+        Materialize.toast('VM Delete Success!', 4000)
+        Session.set('userVMInfo',userVMInfo)
+
 })

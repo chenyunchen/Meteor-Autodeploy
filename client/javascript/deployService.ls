@@ -68,4 +68,13 @@ Template.deployService.events({
       else
           $(e.target).addClass('active')
           Session.set('vmId',e.currentTarget.attributes.vmid.value)
+  'click a#popDockerfile': (e,t)->
+      $('#dockerfileModal').openModal()
+
+  'click a#dockerfileCreate': (e,t)->
+    dockerfile = $('#dockerfile')[0].value
+    Meteor.call 'dockerfileUpload', dockerfile, (err,res)->
+      if not err
+        console.log res
+
 })
