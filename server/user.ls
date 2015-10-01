@@ -2,6 +2,27 @@ root = exports ? this
 root.UserSecret = new Meteor.Collection('usersecret')
 root.UserVM = new Meteor.Collection('uservm')
 fs = Meteor.npmRequire('fs')
+exec = Meteor.npmRequire('child_process').exec
+
+execSSH = (data)->
+  connection = Meteor.npmRequire('ssh2')
+  conn = new connection()
+  conn.on('ready', ->
+    conn.exec(data.script, (err, stream)->
+      if err
+        defer.reject()
+      stream.on('exit', (code, signal)->
+        console.log 'Docker start make images'
+      ).on('close', ->
+        conn.end()
+      )
+    )
+  ).connect({
+    host: data.host,
+    port: data.port
+    username: data.user
+    privateKey: fs.readFileSync(data.key, 'utf-8')
+  })
 
 Meteor.methods({
   'createVM': (data)->
@@ -126,5 +147,24 @@ Meteor.methods({
 
 Meteor.methods({
   'dockerfileUpload': (data)->
-    console.log data
+    user = Meteor.user()
+    dockerfile = data.dockerfile
+    imageName = data.imageName
+    fs.mkdir('/tmp/'+user._id,->
+        fs.writeFile('/tmp/'+user._id+'/dockerfile', dockerfile,(err)->
+          if not err
+            cmd = 'scp -i /Users/yunchen/.ssh/id_rsa -pr /tmp/'+user._id+' azureuser@yunchen.cloudapp.net:/home/azureuser/docker'
+            exec(cmd,(error, stdout, stderr)->
+                console.log imageName
+                data = {
+                  key: '/Users/yunchen/.ssh/id_rsa'
+                  host: '128.199.160.94'
+                  port: 22
+                  user: 'root'
+                  script: 'touch /tmp/success.txt'
+                }
+                execSSH(data)
+            )
+        )
+    )
 })

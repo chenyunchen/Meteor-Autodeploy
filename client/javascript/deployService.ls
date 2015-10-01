@@ -70,11 +70,16 @@ Template.deployService.events({
           Session.set('vmId',e.currentTarget.attributes.vmid.value)
   'click a#popDockerfile': (e,t)->
       $('#dockerfileModal').openModal()
-
+  'click a#popRunShell': (e,t)->
+      $('#runShellModal').openModal()
   'click a#dockerfileCreate': (e,t)->
     dockerfile = $('#dockerfile')[0].value
-    Meteor.call 'dockerfileUpload', dockerfile, (err,res)->
+    imageName = $('#imageName')[0].value
+    data = {
+      dockerfile: dockerfile
+      imageName: imageName
+    }
+    Meteor.call 'dockerfileUpload', data, (err,res)->
       if not err
         console.log res
-
 })

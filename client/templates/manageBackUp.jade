@@ -1,0 +1,91 @@
+template(name = 'manageBackUp')
+  .container
+    .section
+      .row
+        .col.l6.s12
+          .card-panel
+            span.card-title.grey-text
+              h5 Backup List
+            p
+            table.bordered
+              thead
+                tr
+                  th
+                    span.text-primarycolor.left Image
+                  th
+                    span.text-primarycolor.left Size
+                  th
+                    span.text-primarycolor.left Created
+                  th
+                    span.text-primarycolor.left Select
+              tbody
+                tr
+                  td Ubuntu 14.04
+                  td 238 MB
+                  td 3 weeks ago
+                  td
+                    input#test(type='checkbox')
+                    label(for='test')
+                tr
+                  td WECO-SLS
+                  td 2.3 GB
+                  td 1 days ago
+                  td
+                    input#test1(type='checkbox')
+                    label(for='test1')
+                tr
+                  td CentOS
+                  td 218 MB
+                  td 3 weeks ago
+                  td
+                    input#test2(type='checkbox')
+                    label(for='test2')
+                tr
+                  td Minecraft Server
+                  td 1.1 GB
+                  td 1 hour ago
+                  td
+                    input#test3(type='checkbox')
+                    label(for='test3')
+                tr
+                  td Moniter
+                  td 138 MB
+                  td 2 weeks ago
+                  td
+                    input#test4(type='checkbox')
+                    label(for='test4')
+
+            br
+            .right
+              a.waves-effect.btn-flat Select All
+              a.waves-effect.waves-light.btn.red Delete
+            br
+            br
+
+        .col.l6.s12.padding-top3
+          .card-panel
+            span.card-title.grey-text
+              h5 Registry Condition
+            .row
+              .col.s12
+                p Host: yunchen.cloudapp.net:5000
+                p Disk: 14 / 20 GB
+                .progress
+                  .indeterminate
+        .col.l6.s12.padding-top3
+          .card-panel
+            span.card-title.grey-text
+              h5 Create New Images
+            .row
+              .col.s12
+                p Upload... 70%
+                .progress
+                  .determinate(style='width: 70%')
+              p
+                a#popDockerfile.waves-effect.waves-light.btn.light-green.darken-1(href='#')
+                  i.mdi-file-attachment.left
+                  | Custom Your Dockerfile
+              p
+                a#popRunShell.waves-effect.waves-light.btn.teal(href='#')
+                  i.mdi-file-folder-open.left
+                  | Insert shell

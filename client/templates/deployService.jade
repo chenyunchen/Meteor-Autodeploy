@@ -2,6 +2,9 @@ template(name = 'deployService')
   #dockerfileModal.modal.modal-fixed-footer
     .modal-content
       h4 Custom Your Dockerfile
+      .input-field.col.s6
+        input#imageName.validate(type="text")
+        label(for="imageName") Image Name
       .input-field.col.s12
         textarea#dockerfile.materialize-textarea
         label(for='dockerfile')
@@ -9,6 +12,16 @@ template(name = 'deployService')
     .modal-footer
       a.modal-action.modal-close.waves-effect.waves-green.btn-flat Cancel
       a#dockerfileCreate.modal-action.modal-close.waves-effect.waves-green.btn-flat Create Image
+  #runShellModal.modal.modal-fixed-footer
+    .modal-content
+      h4 Run Your Shell
+      .input-field.col.s12
+        textarea#shellContent.materialize-textarea
+        label(for='shellContent')
+          | Command Shell
+    .modal-footer
+      a.modal-action.modal-close.waves-effect.waves-green.btn-flat Cancel
+      a.modal-action.modal-close.waves-effect.waves-green.btn-flat Create Image
   #modal.modal.modal-fixed-footer
     .modal-content
       h4 My Virtual Machine
@@ -41,7 +54,7 @@ template(name = 'deployService')
                     i.mdi-file-attachment.left
                     | Custom Your Dockerfile
                   &nbsp;
-                  a.waves-effect.waves-light.btn.teal(href='#')
+                  a#popRunShell.waves-effect.waves-light.btn.teal(href='#')
                     i.mdi-file-folder-open.left
                     | Insert shell
                 h5.grey-text.darken-2.light Choose Service What You Want

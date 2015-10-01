@@ -12,3 +12,5 @@ Router.map ->
     path: '/deploy/service'
   this.route 'manageService',
     path: '/manage/service'
+  this.route 'manageBackUp',
+    path: '/manage/backup'
