@@ -68,8 +68,8 @@ template(name = 'manageBackUp')
               h5 Registry Condition
             .row
               .col.s12
-                p Host: yunchen.cloudapp.net:5000
-                p Disk: 14 / 20 GB
+                p Host: {{host}}
+                p Disk: {{usage}} / {{capacity}} GB
                 .progress
                   .indeterminate
         .col.l6.s12.padding-top3

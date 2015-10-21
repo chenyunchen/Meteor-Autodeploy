@@ -35,7 +35,10 @@ Meteor.methods({
 
 getVMCPU = (data)->
   host = data.host
-  port = 8080
+  if data.hasOwnProperty('port')
+      port = data.port
+  else
+      port = 8080
   defer = Q.defer()
   HTTP.call('GET','http://'+host+':'+port+'/api/v1.2/docker',
     (error,result)->
@@ -71,10 +74,36 @@ getVMCPU = (data)->
   )
   return defer.promise
 
+getRegStatus = (data)->
+  host = data.host
+  if data.hasOwnProperty('port')
+      port = data.port
+  else
+      port = 8080
+  defer = Q.defer()
+  HTTP.call('GET','http://'+host+':'+port+'/api/v1.2/docker',
+    (error,result)->
+      if !error
+        data = JSON.parse result.content
+        resData = {
+          capacity: 0
+          usage: 0
+        }
+        for container of data
+          containerInfo = data[container]
+          name = containerInfo.aliases[0]
+          if name is 'registry_instance'
+            disk = containerInfo.stats[59].filesystem[0]
+            resData.capacity = Math.floor(disk.capacity/1073741824)
+            resData.usage = Math.floor(disk.usage/1073741824)
+        defer.resolve(resData)
+  )
+  return defer.promise
+
 Meteor.methods({
-  'getStatus': (data)->
+  'getRegStatus': (data)->
     response = Meteor.sync (done)->
-      getVMCPU(data).then (result)->
+      getRegStatus(data).then (result)->
         done(null,result)
     return response.result
 })

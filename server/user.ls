@@ -168,3 +168,37 @@ Meteor.methods({
         )
     )
 })
+
+
+Meteor.methods({
+  'getRegList': ->
+    response = Meteor.sync (done)->
+        cmd1 = 'curl -k https://yunchen:alex821203@yunchen.cloudapp.net:8080/v1/search'
+        cmd2 = 'curl -k https://yunchen:alex821203@yunchen.cloudapp.net:8080/v1/repositories/'
+        cmd3 = 'curl -k https://yunchen:alex821203@yunchen.cloudapp.net:8080/v1/images/'
+        exec(cmd1,(error, stdout, stderr)->
+            data1 = JSON.parse(stdout)
+            tmp = {}
+            ps = []
+            for image in data1.results
+                defer = Q.defer()
+                ps.push(defer.promise)
+                tmp.name = image.name
+                cmd2 += image.name + '/tags'
+                exec(cmd2,(error, stdout, stderr)->
+                    data2 = JSON.parse(stdout)
+                    cmd3 += data2['latest']+'/json'
+                    exec(cmd3,(error, stdout, stderr)->
+                        data3 = JSON.parse(stdout)
+                        tmp.size = data3.Size
+                        dateAgo = moment(data3.created).fromNow()
+                        tmp.ago = dateAgo
+                        defer.resolve(tmp)
+                    )
+
+                )
+            Q.all(ps).then (result)->
+              done(null,result)
+        )
+    return response.result
+})
