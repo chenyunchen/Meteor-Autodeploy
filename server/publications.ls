@@ -1,24 +1,27 @@
-execSSH: (data)->
-  response = Meteor.sync (done)->
-      connection = Meteor.npmRequire('ssh2');
-      conn = new connection();
-      conn.on('ready', ->
-        conn.exec(data.script, (err, stream)->
-          if err
-            defer.reject()
-          stream.on('exit', (code, signal)->
-            done(null,true)
-          ).on('close', ->
-            conn.end()
+fs = Meteor.npmRequire('fs')
+Meteor.methods({
+  'execSSH': (data)->
+    response = Meteor.sync (done)->
+        connection = Meteor.npmRequire('ssh2');
+        conn = new connection();
+        conn.on('ready', ->
+          conn.exec(data.script, (err, stream)->
+            if err
+              defer.reject()
+            stream.on('exit', (code, signal)->
+              done(null,true)
+            ).on('close', ->
+              conn.end()
+            )
           )
-        )
-      ).connect({
-        host: data.host,
-        port: data.port
-        username: data.user
-        privateKey: fs.readFileSync(data.key, 'utf-8')
-      });
-  return response.result
+        ).connect({
+          host: data.host,
+          port: data.port
+          username: data.user
+          privateKey: fs.readFileSync(data.key, 'utf-8')
+        });
+    return response.result
+})
 
 Meteor.methods({
   'createRoute': ->
@@ -99,6 +102,14 @@ getRegStatus = (data)->
         defer.resolve(resData)
   )
   return defer.promise
+
+Meteor.methods({
+  'getStatus': (data)->
+    response = Meteor.sync (done)->
+      getVMCPU(data).then (result)->
+        done(null,result)
+    return response.result
+})
 
 Meteor.methods({
   'getRegStatus': (data)->

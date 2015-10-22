@@ -8,6 +8,8 @@ Template.manageBackUp.helpers(
       Session.get('capacity')
   usage:->
       Session.get('usage')
+  imageList:->
+      Session.get('imageList')
 )
 Template.manageBackUp.rendered =->
   Meteor.call 'getRegStatus', data, (err,res)->
@@ -21,4 +23,4 @@ Template.manageBackUp.created =->
     if err
       console.log err
     else
-      console.log res
+      Session.set('imageList',res)

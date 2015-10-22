@@ -187,10 +187,11 @@ Meteor.methods({
                 cmd2 += image.name + '/tags'
                 exec(cmd2,(error, stdout, stderr)->
                     data2 = JSON.parse(stdout)
+                    tmp.id = data2['latest']
                     cmd3 += data2['latest']+'/json'
                     exec(cmd3,(error, stdout, stderr)->
                         data3 = JSON.parse(stdout)
-                        tmp.size = data3.Size
+                        tmp.size = Math.floor(data3.Size/1048576)
                         dateAgo = moment(data3.created).fromNow()
                         tmp.ago = dateAgo
                         defer.resolve(tmp)

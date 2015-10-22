@@ -19,42 +19,14 @@ template(name = 'manageBackUp')
                   th
                     span.text-primarycolor.left Select
               tbody
-                tr
-                  td Ubuntu 14.04
-                  td 238 MB
-                  td 3 weeks ago
-                  td
-                    input#test(type='checkbox')
-                    label(for='test')
-                tr
-                  td WECO-SLS
-                  td 2.3 GB
-                  td 1 days ago
-                  td
-                    input#test1(type='checkbox')
-                    label(for='test1')
-                tr
-                  td CentOS
-                  td 218 MB
-                  td 3 weeks ago
-                  td
-                    input#test2(type='checkbox')
-                    label(for='test2')
-                tr
-                  td Minecraft Server
-                  td 1.1 GB
-                  td 1 hour ago
-                  td
-                    input#test3(type='checkbox')
-                    label(for='test3')
-                tr
-                  td Moniter
-                  td 138 MB
-                  td 2 weeks ago
-                  td
-                    input#test4(type='checkbox')
-                    label(for='test4')
-
+                each imageList
+                  tr
+                    td {{name}}
+                    td {{size}} MB
+                    td {{ago}}
+                    td
+                      input(id='{{id}}', type='checkbox')
+                      label(for='{{id}}')
             br
             .right
               a.waves-effect.btn-flat Select All
