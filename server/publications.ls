@@ -118,3 +118,7 @@ Meteor.methods({
         done(null,result)
     return response.result
 })
+
+Meteor.publish('Message',->
+  return Message.find()
+)

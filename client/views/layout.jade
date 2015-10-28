@@ -1,4 +1,17 @@
 template(name='layout')
+  #chat.modal.modal-fixed-footer
+    .modal-content
+      h4 Chat Room
+      ul.collection
+        each chatMessages
+          li.collection-item.avatar
+            i.mdi-social-person.circle.grey
+            span.title {{user.profile.name}}
+            p {{message}}
+    .modal-footer
+      a#msgSend.waves-effect.waves-teal.btn-flat(style='float: right') Send
+      div(style='overflow: hidden; padding-right: .5em;')
+        input#msg(type='text',style='width: 100%;')
   ul#dropdown1.dropdown-content
     li
       a(href='/deploy/service',style='color:#444') Cloud Service
@@ -47,16 +60,16 @@ template(name='layout')
     a.btn-floating.btn-large.red.waves-effect.waves-light
       i.large.mdi-content-add
     ul
+      //li
+      //  a.btn-floating.red
+      //    i.large.mdi-editor-insert-chart
       li
-        a.btn-floating.red
-          i.large.mdi-editor-insert-chart
-      li
-        a.btn-floating.yellow.darken-1
+        a.btn-floating.yellow.darken-1(href='mailto:yunchen@nisra.net')
           i.large.mdi-communication-email
       li
-        a.btn-floating.green
+        a.btn-floating.green.modal-trigger(href='#chat')
           i.large.mdi-communication-forum
-      li
-        a.btn-floating.blue
-          i.large.mdi-action-help
+      //li
+      //  a.btn-floating.blue
+      //    i.large.mdi-action-help
   +yield

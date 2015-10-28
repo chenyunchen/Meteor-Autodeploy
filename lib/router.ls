@@ -1,5 +1,7 @@
 Router.configure({
   layoutTemplate: 'layout'
+  data:->
+    @subscribe('Message')
 })
 Router.map ->
   this.route 'index',
