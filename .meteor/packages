@@ -27,5 +27,5 @@ chrismbeckett:toastr
 tomi:upload-server
 tomi:upload-jquery
 jquery
-materialize:materialize
 momentjs:moment
+materialize:materialize@=0.97.0

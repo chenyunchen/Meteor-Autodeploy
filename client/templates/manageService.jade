@@ -4,12 +4,36 @@ template(name = 'manageService')
       h4 Docker Service
       ul.collection
         each userVMServiceInfo
-          li.collection-item.avatar
+          li(class='{{statusColor}}').collection-item.avatar
             i.mdi-action-assessment.circle.green
             span.title {{name}}
             p cpuUsage: {{cpuUsage}}% memoryUsage:{{memoryUsage}}% networkReceive: {{networkReceive}}Bytes newworkTransfer: {{networkTransfer}}Bytes
+            a(href='http://{{host}}:{{port}}',target='_blank') Site Link
             a#service.secondary-content(href='#',serviceId='{{id}}')
               i.mdi-navigation-close.grey-text
+        li.collection-item.avatar
+          i.mdi-action-assessment.circle.red
+          a#demo.waves-effect.waves-light.btn.red DEMO Active
+  if openModal2
+    #modal2.modal
+      .modal-content
+        h4 Set Service Limit to Restart
+        .row
+          .input-field.col.s4
+            input#cpuLimit(type='text',value='100').validate
+            label.active(for='cpuLimit') Set CPU(%)
+          .input-field.col.s4
+            input#memLimit(type='text',value='100').validate
+            label.active(for='memLimit') Set Memory(%)
+        .row
+          .input-field.col.s4
+            input#txLimit(type='text').validate
+            label(for='txLimit') Set Tx(bytes)
+          .input-field.col.s4
+            input#rxLimit(type='text').validate
+            label(for='rxLimit') Set Rx(bytes)
+      .modal-footer
+        a#setServiceBtn.modal-action.modal-close.waves-effect.waves-green.btn-flat Set
   .container
     .section
       a.title(href='') My Virtual Machine
@@ -43,4 +67,6 @@ template(name = 'manageService')
                   a.waves-effect.waves-orange.btn-flat
                     | Status: {{status}}
                 .card-action
-                  a#deleteVM.waves-effect.waves-light.btn.red(style='color:white',vmId='{{id}}') Delete this machine
+                  a#deleteVM.waves-effect.waves-light.btn.red(style='color:white',vmId='{{id}}') Delete This Machine
+                  br
+                  a#setService.waves-effect.waves-light.btn(href='#modal2' style='color:white',vmId='{{id}}') Set Service Status

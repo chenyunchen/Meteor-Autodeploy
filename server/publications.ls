@@ -52,6 +52,12 @@ getVMCPU = (data)->
           containerInfo = data[container]
           id = containerInfo.aliases[1]
           name = containerInfo.aliases[0]
+          if name is 'slswithdb_wecosls_1'
+              port = '80'
+          else if name is 'cadvisor'
+              port = '8080'
+          else if name is 'ipython_notebook'
+              port = '1234'
           cur = containerInfo.stats[containerInfo.stats.length-1]
           prev = containerInfo.stats[containerInfo.stats.length-2]
           rawUsage = cur.cpu.usage.total - prev.cpu.usage.total
@@ -71,6 +77,7 @@ getVMCPU = (data)->
             memoryUsage: memoryUsage
             networkReceive: networkReceive
             networkTransfer: networkTransfer
+            port: port
           }
           all.push(usage)
         defer.resolve(all)

@@ -48,7 +48,7 @@ Template.deployService.events({
               if Session.get('moniter')
                   data.script = 'sudo docker run --volume=/:/rootfs:ro --volume=/var/run:/var/run:rw --volume=/sys:/sys:ro --volume=/var/lib/docker/:/var/lib/docker:ro --publish=8080:8080 --detach=true --name=cadvisor google/cadvisor:latest'
               if Session.get('ipython')
-                  data.script += ';sudo docker run -d -p 80:8888 --name=ipython_notebook -e "PASSWORD=default" -e "USE_HTTP=1" ipython/notebook'
+                  data.script += ';sudo docker run -d -p 1234:8888 --name=ipython_notebook -e "PASSWORD=default" -e "USE_HTTP=1" ipython/notebook'
               Meteor.call 'execSSH', data, (err,res)->
                   if not err
                       Meteor.defer(->
